@@ -1,36 +1,48 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Enchant Bitcoin with your own spells ✨
+description: "Build stuff: tokens, NFTs, you (create and) name it!"
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: "Build stuff: tokens, NFTs, you (create and) name it!"
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/charms.svg
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get started
+      link: /guides/getting-started/
+      icon: rocket
+    - text: Why?
+      link: /concepts/why/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
-
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+<CardGrid>
+	<Card title="Start a new project" icon="add-document">
+		```sh
+        charms app new my-token
+        ```
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Implement application logic" icon="pencil">
+		```rust
+        pub fn app_contract(
+            app: &App,
+            tx: &Transaction,
+            x: &Data,
+            w: &Data) -> bool
+        {
+            todo!()
+        }
+        ```
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
+	<Card title="Test your spells" icon="laptop">
+        ```sh
+        charms app vk
+        charms app run <./spells/mint-tokens.yaml
+        ```
 	</Card>
 	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+		Learn more in [the Charms Docs](/concepts/why).
 	</Card>
 </CardGrid>

@@ -6,22 +6,31 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'Charms',
+			customCss: [
+				'./src/styles/custom.css'
+			],
+			logo: {
+				light: './src/assets/logo-charms.png',
+				replacesTitle: true,
+				dark: './src/assets/logo-charms-dark.png',
+			},
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/sigma0-dev/charms',
 			},
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
+					label: 'Concepts',
+					autogenerate: { directory: 'concepts' },
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Guides',
+					autogenerate: { directory: 'guides' },
 				},
+				// {
+				// 	label: 'Reference',
+				// 	autogenerate: { directory: 'reference' },
+				// },
 			],
 		}),
 	],
