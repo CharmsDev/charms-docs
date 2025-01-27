@@ -16,6 +16,7 @@ export default defineConfig({
 				dark: './src/assets/logo-charms-dark.png',
 			},
 			social: {
+				"x.com": 'https://x.com/CharmsDev',
 				github: 'https://github.com/sigma0-dev/charms',
 			},
 			sidebar: [

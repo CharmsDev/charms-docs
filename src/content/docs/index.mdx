@@ -8,10 +8,10 @@ hero:
     file: ../../assets/charms.svg
   actions:
     - text: Get started
-      link: /guides/getting-started/
+      link: /guides/get-started
       icon: rocket
     - text: Why?
-      link: /concepts/why/
+      link: /concepts/why
       icon: right-arrow
       variant: minimal
 ---
@@ -38,11 +38,12 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 	<Card title="Test your spells" icon="laptop">
         ```sh
-        charms app vk
-        charms app run <./spells/mint-tokens.yaml
+        ## edit the spell at ./spells/mint-tokens.yaml
+        ## then run
+        charms app run --spell=./spells/mint-tokens.yaml
         ```
 	</Card>
 	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Charms Docs](/concepts/why).
+		Learn more in [the Charms Docs](./concepts/why).
 	</Card>
 </CardGrid>
