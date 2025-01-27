@@ -17,7 +17,8 @@ alias b=bitcoin-cli
 
 ## Using an app
 
-We've just tested the app with an NFT-minting spell. Let's use it on Bitcoin `testnet4`.
+We've just tested the app with an NFT-minting spell. Let's use it on Bitcoin `testnet4` (we have a node set up
+in [pre-requisites](/guides/pre-reqs)).
 
 ```sh
 app_bins=$(charms app build)
@@ -38,10 +39,22 @@ The _commit_ transaction creates exactly one output (committing to a spell and i
 _cast_ transaction. The _cast_ transaction contains the spell and proof (in the witness spending the
 output created by the _commit_ tx), and it cannot exist without the _commit_ transaction.
 
-Note: currently, `charms wallet cast` takes a pretty long time (about 27 minutes on MBP M2 64GB) and requires Docker to
-run. We're working on improving this.
+:::note
+Currently, `charms wallet cast` takes a pretty long time (about 27 minutes on MBP M2 64GB) and requires Docker to
+run. We're working on improving this. The easiest thing you can do right now to make it faster is to have these set in
+your shell:
 
-`charms wallet cast` prints the 2 hex-encoded signed transactions at the end of its output, which looks like a JSON array (because it is a JSON array):
+```bash
+export SP1_PROVER=network
+export NETWORK_PRIVATE_KEY=$SP1_PRIVATE_KEY
+```
+
+To generate your own
+`$SP1_PRIVATE_KEY`, [get access to SP1 Prover Network](https://docs.succinct.xyz/docs/generating-proofs/prover-network).
+:::
+
+`charms wallet cast` prints the 2 hex-encoded signed transactions at the end of its output, which looks like a JSON
+array (because it is a JSON array):
 
 ```
 ["020000000001015f...57505efa00000000", "020000000001025f...e14c656300000000"]
