@@ -17,7 +17,7 @@ export default defineConfig({
 			},
 			social: {
 				"x.com": 'https://x.com/CharmsDev',
-				github: 'https://github.com/sigma0-dev/charms',
+				github: 'https://github.com/CharmsDev/charms',
 			},
 			sidebar: [
 				{
