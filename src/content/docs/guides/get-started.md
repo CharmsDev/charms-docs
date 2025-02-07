@@ -42,11 +42,11 @@ Test the app for a spell with a simple NFT mint example:
 ```sh
 export app_vk=$(charms app vk)
 
-# set to a UTXO you're spending to mint the NFT (you can see what you have by `b listunspent`)
-export in_utxo_0="dc78b09d767c8565c4a58a95e7ad5ee22b28fc1685535056a395dc94929cdd5f:1"
+# set to a UTXO you're spending (you can see what you have by running `b listunspent`)
+export in_utxo_0="a2889190343435c86cd1c2b70e58efed0d101437a753e154dff1879008898cd2:2"
 
-export app_id=$(sha256 -s "${in_utxo_0}")
-export addr_0=$(b getnewaddress)
+export app_id=$(echo -n "${in_utxo_0}" | sha256sum | cut -d' ' -f1)
+export addr_0="tb1p3w06fgh64axkj3uphn4t258ehweccm367vkdhkvz8qzdagjctm8qaw2xyv"
 
 cat ./spells/mint-nft.yaml | envsubst | charms app run
 ```

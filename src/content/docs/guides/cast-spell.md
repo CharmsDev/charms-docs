@@ -25,7 +25,7 @@ app_bins=$(charms app build)
 
 # pick from the output of `bitcoin-cli listunspent`
 # should NOT be the same as the one you used for minting the NFT
-funding_utxo_id="8c1d638a7ff6b6a977580beec47fcc9b8a93e44893c27ab69935c14e9316a735:1"
+funding_utxo_id="2d6d1603f0738085f2035d496baf2b91a639d204b414ea180beb417a3e09f84e:1"
 
 cat ./spells/mint-nft.yaml | envsubst | RUST_LOG=info charms wallet cast --app-bins=${app_bins} --funding-utxo-id=${funding_utxo_id}
 ```

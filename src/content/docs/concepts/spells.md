@@ -12,20 +12,19 @@ The idea is to add *charms*-related metadata (*spells*) to Bitcoin transactions 
 *Spells* are **client-side validated**, meaning that **the users** choose to interpret or ignore them. If they choose to interpret them, they can use `charms` — similar to Ordinals and Runes interpreted by `ord`.
 
 A *spell* is said to be *correct* if and only if all of these are true:
-- the enhanced (enchanted) transaction is valid (can be included in a block as such)
 - it is successfully parsed and interpreted
-- makes sense for the transaction (e.g., doesn't produce more charms than there are outputs)
-- carries a valid proof
+- makes sense for the transaction (e.g., doesn't produce more Charms outputs than there are Bitcoin outputs)
+- has a valid proof
 
 *Correct spells* can mint, burn and transfer tokens. The practical effect of a *spell* is that tokens are considered parts of the enhanced transaction outputs.
 
-*Incorrect spells* have are ignored.
+*Incorrect spells* are ignored.
 
 Double-spending is prevented by Bitcoin.
 
 ![](../../../assets/images/one-does-not.jpg)
 
-## What spells look like
+## What Spells Look Like
 
 *Spells* create and transform _charms_ via Bitcoin transactions.
 
@@ -84,7 +83,7 @@ outs:
 
 In this example we have:
 
-- `apps` — a list of apps involved in the spell. The app is a tuple of `tag/identity/VK` (see [`App`](https://docs.rs/charms-data/0.3.0/charms_data/struct.App.html)) where:
+- `apps` — a list of apps involved in the spell. App is a tuple of `tag/identity/VK` (see [`App`](https://docs.rs/charms-data/0.3.0/charms_data/struct.App.html)) where:
   - `tag` is a single character representing the app type (`n` for NFTs, `t` for fungible tokens).
     `tag` can be anything, but `n` and `t` have special meaning (simple transfers of NFTs and tokens don't need app contract proofs, so the recursive spell proof can be generated faster).
   - `identity` is a 32-byte array identifying the asset within this app.
