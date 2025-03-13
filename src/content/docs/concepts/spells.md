@@ -40,7 +40,7 @@ OP_ENDIF
 ```
 where: 
 - `OP_PUSH "spell"` shows that the envelope contains a *spell*.
-- `OP_PUSH $spell_data` — CBOR-encoded [`NormalizedSpell`](https://docs.rs/charms/0.3.0/charms/spell/struct.NormalizedSpell.html).
+- `OP_PUSH $spell_data` — CBOR-encoded [`NormalizedSpell`](https://docs.rs/charms/0.4.1/charms/spell/struct.NormalizedSpell.html).
 - `OP_PUSH $proof_data` — Groth16 proof attesting to verification of correctness of the spell.
 
 
@@ -83,7 +83,7 @@ outs:
 
 In this example we have:
 
-- `apps` — a list of apps involved in the spell. App is a tuple of `tag/identity/VK` (see [`App`](https://docs.rs/charms-data/0.3.0/charms_data/struct.App.html)) where:
+- `apps` — a list of apps involved in the spell. App is a tuple of `tag/identity/VK` (see [`App`](https://docs.rs/charms-data/0.4.1/charms_data/struct.App.html)) where:
   - `tag` is a single character representing the app type (`n` for NFTs, `t` for fungible tokens).
     `tag` can be anything, but `n` and `t` have special meaning (simple transfers of NFTs and tokens don't need app contract proofs, so the recursive spell proof can be generated faster).
   - `identity` is a 32-byte array identifying the asset within this app.
