@@ -13,7 +13,7 @@ Install Charms CLI:
 ```sh
 ## important to have this end with `/target` (a dependency issue)
 export CARGO_TARGET_DIR=$(mktemp -d)/target
-cargo install --locked charms --version=0.4.1
+cargo install --locked charms --version=0.5.1
 ```
 
 ## Create an app
