@@ -38,7 +38,67 @@ export default defineConfig({
 				},
 				{
 					label: 'Guides',
-					autogenerate: { directory: 'guides' },
+					items: [
+						{
+							label: 'Create Your Charms',
+							collapsed: false,
+							autogenerate: { directory: 'guides/create-your-charms' },
+						},
+						{
+							label: 'Wallet Integration',
+							collapsed: false,
+							items: [
+								{
+									label: 'Introduction',
+									link: '/guides/wallet-integration/introduction/',
+								},
+								{
+									label: 'Charms Visualization',
+									link: '/guides/wallet-integration/visualization/',
+								},
+								{
+									label: 'Charms Transfer',
+									collapsed: false,
+									items: [
+										{
+											label: 'Introduction to Transfers',
+											link: '/guides/wallet-integration/transfer/introduction/',
+										},
+										{
+											label: 'NFT Transfers',
+											link: '/guides/wallet-integration/transfer/nft/',
+										},
+										{
+											label: 'Token Transfers',
+											link: '/guides/wallet-integration/transfer/token/',
+										},
+										{
+											label: 'Prover API',
+											link: '/guides/wallet-integration/transfer/prover-api/',
+										},
+										{
+											label: 'Signing Transactions',
+											link: '/guides/wallet-integration/transfer/signing/',
+										},
+										{
+											label: 'Broadcasting Transactions',
+											link: '/guides/wallet-integration/transfer/broadcasting/',
+										},
+									],
+								},
+								{
+									label: 'References',
+									collapsed: false,
+									items: [
+										{
+											label: 'Spell JSON Reference',
+											link: '/guides/wallet-integration/references/spell-json/',
+										},
+									],
+								},
+							],
+						},
+					],
 				},
 				// {
 				// 	label: 'Reference',

@@ -1,7 +1,7 @@
 ---
 title: Pre-Requisites
 sidebar:
-  order: 0
+  order: 1
 ---
 
 ### Bitcoin Core

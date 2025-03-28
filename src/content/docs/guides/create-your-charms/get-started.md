@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 sidebar:
-  order: 1
+  order: 2
 ---
 
 Let's get started with Charms! This guide will walk you through building your Charms app in a few minutes.
