@@ -20,14 +20,20 @@ alias b=bitcoin-cli
 We've just tested the app with an NFT-minting spell. Let's use it on Bitcoin `testnet4` (we have a node set up
 in [pre-requisites](/guides/pre-reqs)).
 
+Prepare:
 ```sh
 app_bins=$(charms app build)
 
 # pick from the output of `bitcoin-cli listunspent`
 # should NOT be the same as the one you used for minting the NFT
-funding_utxo_id="2d6d1603f0738085f2035d496baf2b91a639d204b414ea180beb417a3e09f84e:1"
+funding_utxo="2d6d1603f0738085f2035d496baf2b91a639d204b414ea180beb417a3e09f84e:1"
 
-cat ./spells/mint-nft.yaml | envsubst | RUST_LOG=info charms wallet cast --app-bins=${app_bins} --funding-utxo-id=${funding_utxo_id}
+export RUST_LOG=info
+```
+
+Run:
+```sh
+cat ./spells/mint-nft.yaml | envsubst | charms spell cast --app-bins=${app_bins} --funding-utxo=${funding_utxo}
 ```
 
 This will create and sign (but not yet submit to the network) two Bitcoin transactions:
@@ -40,20 +46,10 @@ _cast_ transaction. The _cast_ transaction contains the spell and proof (in the 
 output created by the _commit_ tx), and it cannot exist without the _commit_ transaction.
 
 :::note
-Currently, `charms wallet cast` takes a pretty long time (about 27 minutes on MBP M2 64GB) and requires Docker to
-run. We're working on improving this. The easiest thing you can do right now to make it faster is to have these set in
-your shell:
-
-```bash
-export SP1_PROVER=network
-export NETWORK_PRIVATE_KEY=$SP1_PRIVATE_KEY
-```
-
-To generate your own
-`$SP1_PRIVATE_KEY`, [get access to SP1 Prover Network](https://docs.succinct.xyz/docs/generating-proofs/prover-network).
+Currently, `charms spell prove` and `charms spell cast` take a pretty long time (about 7 minutes). We're working on improving this.
 :::
 
-`charms wallet cast` prints the 2 hex-encoded signed transactions at the end of its output, which looks like a JSON
+`charms spell cast` prints the 2 hex-encoded signed transactions at the end of its output, which looks like a JSON
 array (because it is a JSON array):
 
 ```
