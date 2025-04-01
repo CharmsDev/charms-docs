@@ -4,7 +4,7 @@ sidebar:
   order: 0
 ---
 
-By following this guide, you'll learn how to create Charms apps enabling use cases such as collectibles, tokens, and programmable assets on Bitcoin without requiring additional blockchains or layer-2 solutions.
+By following this guide, you'll learn how to create Charms apps, enabling use cases such as collectibles, tokens, and programmable assets on Bitcoin without requiring additional blockchains or layer-2 solutions.
 
 ## What You'll Learn
 
