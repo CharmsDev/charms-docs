@@ -56,7 +56,7 @@ For NFT transfers, the entire charm is sent to a single destination. Here's the 
 ## Implementation Steps
 
 1. **Retrieve Charm Data**: Get the charm's details from the source UTXO
-2. **Construct the Spell JSON**: Fill in the template with the specific charm data (see [Spell JSON Reference](/guides/wallet-integration/references/spell-json))
+2. **Construct the Spell JSON**: Fill in the template with the specific charm data (see [Spell JSON Reference](/references/spell-json))
 3. **Validate the JSON**: Ensure all required fields are present and correctly formatted
 4. **Proceed to Prover API**: Use this JSON in the Prover API call (see [Prover API](/guides/wallet-integration/transfer/prover-api))
 

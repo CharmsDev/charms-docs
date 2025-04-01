@@ -40,7 +40,7 @@ export default defineConfig({
 					label: 'Guides',
 					items: [
 						{
-							label: 'Create Your Charms',
+							label: 'Charms Apps',
 							collapsed: false,
 							autogenerate: { directory: 'guides/create-your-charms' },
 						},
@@ -86,17 +86,17 @@ export default defineConfig({
 										},
 									],
 								},
-								{
-									label: 'References',
-									collapsed: false,
-									items: [
-										{
-											label: 'Spell JSON Reference',
-											link: '/guides/wallet-integration/references/spell-json/',
-										},
-									],
-								},
 							],
+						},
+					],
+				},
+				{
+					label: 'References',
+					collapsed: false,
+					items: [
+						{
+							label: 'Spell JSON Reference',
+							link: '/references/spell-json/',
 						},
 					],
 				},

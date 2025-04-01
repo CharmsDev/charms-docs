@@ -47,7 +47,7 @@ The following sections will guide you through each step of the transfer process 
 
 - [Transfer NFTs](/guides/wallet-integration/transfer/nft): How to transfer an entire NFT charm
 - [Transfer Tokens](/guides/wallet-integration/transfer/token): How to transfer a portion of fungible tokens
-- [Spell JSON](/guides/wallet-integration/references/spell-json): Detailed explanation of the Spell JSON format
+- [Spell JSON](/references/spell-json): Detailed explanation of the Spell JSON format
 - [Prover API](/guides/wallet-integration/transfer/prover-api): How to use the Prover API to generate transactions
 - [Signing Transactions](/guides/wallet-integration/transfer/signing): How to sign Charms transactions
 - [Broadcasting Transactions](/guides/wallet-integration/transfer/broadcasting): How to broadcast transactions to the network
