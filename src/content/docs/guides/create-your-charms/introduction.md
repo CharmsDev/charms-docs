@@ -4,9 +4,7 @@ sidebar:
   order: 0
 ---
 
-This guide provides developers with the technical specifications needed to create and use their own Charms on Bitcoin.
-
-By following this guide, you'll learn how to set up your environment, create a Charms app, and cast spells onto the Bitcoin blockchain—enabling new use cases such as collectibles, tokens, and programmable assets on Bitcoin without requiring additional blockchains or layer-2 solutions.
+By following this guide, you'll learn how to create Charms apps enabling use cases such as collectibles, tokens, and programmable assets on Bitcoin without requiring additional blockchains or layer-2 solutions.
 
 ## What You'll Learn
 
