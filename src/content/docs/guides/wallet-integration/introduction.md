@@ -4,11 +4,11 @@ sidebar:
   order: 1
 ---
 
-This guide provides wallet providers with the technical specifications needed to integrate Charms support into their applications.
+This guide provides wallet providers with the technical specifications needed to integrate Charms support into their wallets.
 
-By implementing this protocol, wallet providers can offer their users the ability to view, transfer, and interact with Charms—enabling new use cases such as collectibles, tokens, and programmable assets on Bitcoin without requiring additional blockchains or layer-2 solutions.
+By implementing this protocol, wallet providers can offer their users the ability to view, transfer, and interact with Charms, enabling use cases such as collectibles, tokens, and programmable assets on Bitcoin without requiring additional blockchains or layer-2 solutions.
 
-## Benefits of Integration
+## End Results
 
 By implementing this protocol, wallet providers can offer their users the ability to:
 
@@ -19,11 +19,11 @@ By implementing this protocol, wallet providers can offer their users the abilit
 
 ## Integration Steps
 
-A complete Charms wallet integration consists of several components:
+Charms wallet integration consists of several components:
 
 1. **Visualization**: Displaying Charms assets in the wallet interface
 2. **Transfer NFTs**: Enabling users to send and receive Charms
-3. **Transfer Tokens**: Connecting to the Charms API for transaction creation
+3. **Transfer Fungible Tokens**: Connecting to the Charms API for transaction creation
 4. **Wallet features considerations**: Some current operations like UTXO consolidation need to be Charms-compliant
 
 ## Guide Sections
@@ -34,9 +34,11 @@ A complete Charms wallet integration consists of several components:
    - [Introduction](/guides/wallet-integration/transfer/introduction)
    - [Transfer NFTs](/guides/wallet-integration/transfer/nft)
    - [Transfer Tokens](/guides/wallet-integration/transfer/token)
-   - [Spell JSON](/guides/wallet-integration/transfer/spell-json)
    - [Prover API](/guides/wallet-integration/transfer/prover-api)
    - [Signing Transactions](/guides/wallet-integration/transfer/signing)
    - [Broadcasting Transactions](/guides/wallet-integration/transfer/broadcasting)
 
-The following sections will guide you through each of these components in detail.
+## References
+
+- [Spell JSON](/references/spell-json)
+
