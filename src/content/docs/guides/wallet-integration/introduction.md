@@ -28,10 +28,9 @@ Charms wallet integration consists of several components:
 
 ## Guide Sections
 
-1. [Introduction](/guides/wallet-integration/introduction) (this page)
+1. Introduction (this page)
 2. [Charms Visualization](/guides/wallet-integration/visualization)
-3. Charms Transfer
-   - [Introduction](/guides/wallet-integration/transfer/introduction)
+3. [Charms Transfer](/guides/wallet-integration/transfer/transfers)
    - [Transfer NFTs](/guides/wallet-integration/transfer/nft)
    - [Transfer Tokens](/guides/wallet-integration/transfer/token)
    - [Prover API](/guides/wallet-integration/transfer/prover-api)

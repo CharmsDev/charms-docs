@@ -11,26 +11,27 @@ To display Charms assets in your wallet, you'll need to fetch data from the Char
 To get all Charms associated with a specific UTXO, call the following API endpoint:
 
 ```
-https://api.charms.dev/<utxo>
+https://api-t4.charms.dev/spells/<txid>
 ```
 
-Replace `<utxo>` with the transaction ID (no need to add the index txid:vout) of the UTXO you want to query.
+Replace `<txid>` with the Bitcoin transaction ID you want to query.
 
 ### Example
 
-```
-https://api-t4.charms.dev/spells/1acee7fb7c922b205e7c63abffe39a53527d4d7bbb0e5327a9b72350115a7ebb
+```http request
+GET https://api-t4.charms.dev/spells/1acee7fb7c922b205e7c63abffe39a53527d4d7bbb0e5327a9b72350115a7ebb
 ```
 
 ## API Response Structure
 
-The API returns a JSON object containing information about all Charms associated with the specified UTXO. The response includes:
+The API returns a JSON object containing information about all Charms in the outputs of the specified transaction. The response includes:
 
-- Charm identifiers
-- Charm types (NFT or token)
-- Metadata (name, description, image URL, etc.)
-- Quantities (for fungible tokens)
-- Additional properties specific to the Charm
+- Charms App Specifications
+- Input Specifications, each containing:
+  - UTXO ID of the input
+- Output Specifications with Charms — mappings of Apps to Charms' contents, which may be:
+  - Amounts (for fungible tokens)
+  - Arbitrary data (for NFTs)
 
 ### Example Response
 
@@ -79,7 +80,7 @@ When implementing Charms visualization in your wallet:
 For testing purposes, you can use the testnet API endpoint:
 
 ```
-https://api-t4.charms.dev/spells/<utxo>
+https://api-t4.charms.dev/spells/<txid>
 ```
 
 This allows you to develop and test your integration without using mainnet assets.

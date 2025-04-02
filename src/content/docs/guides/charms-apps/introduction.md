@@ -14,6 +14,6 @@ By following this guide, you'll learn how to create Charms apps, enabling use ca
 
 ## Sections
 
-1. [Pre-Requisites](/guides/create-your-charms/pre-reqs)
-2. [Getting Started](/guides/create-your-charms/get-started)
-3. [Cast a Spell](/guides/create-your-charms/cast-spell)
+1. [Pre-Requisites](/guides/charms-apps/pre-reqs)
+2. [Getting Started](/guides/charms-apps/get-started)
+3. [Cast a Spell](/guides/charms-apps/cast-spell)

@@ -42,7 +42,7 @@ export default defineConfig({
 						{
 							label: 'Charms Apps',
 							collapsed: false,
-							autogenerate: { directory: 'guides/create-your-charms' },
+							autogenerate: { directory: 'guides/charms-apps' },
 						},
 						{
 							label: 'Wallet Integration',
@@ -57,12 +57,12 @@ export default defineConfig({
 									link: '/guides/wallet-integration/visualization/',
 								},
 								{
-									label: 'Charms Transfer',
+									label: 'Charms Transfers',
 									collapsed: false,
 									items: [
 										{
-											label: 'Introduction to Transfers',
-											link: '/guides/wallet-integration/transfer/introduction/',
+											label: 'Transfers Overview',
+											link: '/guides/wallet-integration/transfer/overview/',
 										},
 										{
 											label: 'NFT Transfers',

@@ -1,12 +1,12 @@
 ---
-title: Introduction
+title: Transfers Overview
 sidebar:
   order: 1
 ---
 
 This guide introduces the concepts and processes involved in transferring Charms assets on the Bitcoin network. Understanding these fundamentals is essential before implementing specific transfer types.
 
-Charms, as other digital assets can be tranfered from one address to another while preserving their unique properties and provenance. Unlike regular Bitcoin transactions, Charms transfers require a specific protocol to ensure the charm's properties are maintained throughout the transfer process.
+Charms, as other digital assets can be transferred from one address to another while preserving their unique properties and provenance. Unlike regular Bitcoin transactions, Charms transfers require a specific protocol to ensure the charm's properties are maintained throughout the transfer process.
 
 ## Transfer Types
 
@@ -47,7 +47,10 @@ The following sections will guide you through each step of the transfer process 
 
 - [Transfer NFTs](/guides/wallet-integration/transfer/nft): How to transfer an entire NFT charm
 - [Transfer Tokens](/guides/wallet-integration/transfer/token): How to transfer a portion of fungible tokens
-- [Spell JSON](/references/spell-json): Detailed explanation of the Spell JSON format
 - [Prover API](/guides/wallet-integration/transfer/prover-api): How to use the Prover API to generate transactions
 - [Signing Transactions](/guides/wallet-integration/transfer/signing): How to sign Charms transactions
 - [Broadcasting Transactions](/guides/wallet-integration/transfer/broadcasting): How to broadcast transactions to the network
+
+## References
+
+- [Spell JSON](/references/spell-json): Detailed explanation of the Spell JSON format
