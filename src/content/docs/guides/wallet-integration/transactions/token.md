@@ -69,7 +69,7 @@ The sum of `remaining` amounts in the outputs must equal the `remaining` amount 
 2. **Calculate Amounts**: Determine the transfer amount and remaining amount
 3. **Construct the Spell JSON**: Fill in the template with the specific token data (see [Spell JSON Reference](/references/spell-json))
 4. **Validate the JSON**: Ensure all required fields are present and correctly formatted
-5. **Proceed to Prover API**: Use this JSON in the Prover API call (see [Prover API](/guides/wallet-integration/transfer/prover-api))
+5. **Proceed to Prover API**: Use this JSON in the Prover API call (see [Prover API](/guides/wallet-integration/transactions/prover-api))
 
 ## Example
 

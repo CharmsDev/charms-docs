@@ -30,12 +30,12 @@ Charms wallet integration consists of several components:
 
 1. Introduction (this page)
 2. [Charms Visualization](/guides/wallet-integration/visualization)
-3. [Charms Transfer](/guides/wallet-integration/transfer/overview)
-   - [Transfer NFTs](/guides/wallet-integration/transfer/nft)
-   - [Transfer Tokens](/guides/wallet-integration/transfer/token)
-   - [Prover API](/guides/wallet-integration/transfer/prover-api)
-   - [Signing Transactions](/guides/wallet-integration/transfer/signing)
-   - [Broadcasting Transactions](/guides/wallet-integration/transfer/broadcasting)
+3. [Charms Transfer](/guides/wallet-integration/transactions/overview)
+   - [Transfer NFTs](/guides/wallet-integration/transactions/nft)
+   - [Transfer Tokens](/guides/wallet-integration/transactions/token)
+   - [Prover API](/guides/wallet-integration/transactions/prover-api)
+   - [Signing Transactions](/guides/wallet-integration/transactions/signing)
+   - [Broadcasting Transactions](/guides/wallet-integration/transactions/broadcasting)
 
 ## References
 

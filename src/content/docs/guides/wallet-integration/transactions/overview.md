@@ -42,11 +42,11 @@ The complete transfer process involves several key steps:
 
 The following sections will guide you through each step of the transfer process in detail:
 
-- [Transfer NFTs](/guides/wallet-integration/transfer/nft): How to transfer an entire NFT charm
-- [Transfer Tokens](/guides/wallet-integration/transfer/token): How to transfer a portion of fungible tokens
-- [Prover API](/guides/wallet-integration/transfer/prover-api): How to use the Prover API to generate transactions
-- [Signing Transactions](/guides/wallet-integration/transfer/signing): How to sign Charms transactions
-- [Broadcasting Transactions](/guides/wallet-integration/transfer/broadcasting): How to broadcast transactions to the network
+- [Transfer NFTs](/guides/wallet-integration/transactions/nft): How to transfer an NFT charm
+- [Transfer Tokens](/guides/wallet-integration/transactions/token): How to transfer fungible tokens
+- [Prover API](/guides/wallet-integration/transactions/prover-api): How to use the Prover API to generate transactions
+- [Signing Transactions](/guides/wallet-integration/transactions/signing): How to sign Charms transactions
+- [Broadcasting Transactions](/guides/wallet-integration/transactions/broadcasting): How to broadcast transactions to the network
 
 ## References
 

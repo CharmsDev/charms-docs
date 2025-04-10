@@ -38,7 +38,7 @@ const requestBody = {
 
 ### Parameters
 
-- **spell**: The Spell JSON object (see [Spell JSON Parameters](/guides/wallet-integration/transfer/spell-json))
+- **spell**: The Spell JSON object (see [Spell JSON Parameters](/guides/wallet-integration/transactions/spell-json))
 - **binaries**: An object containing binary data (empty for basic transfers)
 - **prev_txs**: An array of previous transactions that created the UTXOs being spent, necessary to verify ownership in Bitcoin. Each transaction in the array should be provided in raw hex format.
 - **funding_utxo**: The UTXO to use for funding the transaction (txid:vout format)

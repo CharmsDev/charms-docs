@@ -61,28 +61,28 @@ export default defineConfig({
 									collapsed: false,
 									items: [
 										{
-											label: 'Transfers Overview',
-											link: '/guides/wallet-integration/transfer/overview/',
+											label: 'Transactions Overview',
+											link: '/guides/wallet-integration/transactions/overview/',
 										},
 										{
 											label: 'NFT Transfers',
-											link: '/guides/wallet-integration/transfer/nft/',
+											link: '/guides/wallet-integration/transactions/nft/',
 										},
 										{
 											label: 'Token Transfers',
-											link: '/guides/wallet-integration/transfer/token/',
+											link: '/guides/wallet-integration/transactions/token/',
 										},
 										{
 											label: 'Prover API',
-											link: '/guides/wallet-integration/transfer/prover-api/',
+											link: '/guides/wallet-integration/transactions/prover-api/',
 										},
 										{
 											label: 'Signing Transactions',
-											link: '/guides/wallet-integration/transfer/signing/',
+											link: '/guides/wallet-integration/transactions/signing/',
 										},
 										{
 											label: 'Broadcasting Transactions',
-											link: '/guides/wallet-integration/transfer/broadcasting/',
+											link: '/guides/wallet-integration/transactions/broadcasting/',
 										},
 									],
 								},
