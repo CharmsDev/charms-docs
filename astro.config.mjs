@@ -57,7 +57,7 @@ export default defineConfig({
 									link: '/guides/wallet-integration/visualization/',
 								},
 								{
-									label: 'Charms Transfers',
+									label: 'Charms Transactions',
 									collapsed: false,
 									items: [
 										{

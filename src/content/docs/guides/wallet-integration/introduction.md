@@ -22,15 +22,15 @@ By implementing this protocol, wallet providers can offer their users the abilit
 Charms wallet integration consists of several components:
 
 1. **Visualization**: Displaying Charms assets in the wallet interface
-2. **Transfer NFTs**: Enabling users to send and receive Charms
-3. **Transfer Fungible Tokens**: Connecting to the Charms API for transaction creation
+2. **Transfer NFTs**: Enabling users to send NFT charms
+3. **Transfer Fungible Tokens**: Enabling users to send fungible token charms
 4. **Wallet features considerations**: Some current operations like UTXO consolidation need to be Charms-compliant
 
 ## Guide Sections
 
 1. Introduction (this page)
 2. [Charms Visualization](/guides/wallet-integration/visualization)
-3. [Charms Transfer](/guides/wallet-integration/transfer/transfers)
+3. [Charms Transfer](/guides/wallet-integration/transfer/overview)
    - [Transfer NFTs](/guides/wallet-integration/transfer/nft)
    - [Transfer Tokens](/guides/wallet-integration/transfer/token)
    - [Prover API](/guides/wallet-integration/transfer/prover-api)
