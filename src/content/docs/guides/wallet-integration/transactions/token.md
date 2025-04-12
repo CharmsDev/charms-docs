@@ -53,15 +53,15 @@ The simplest case is when the transaction does **not involve** anything beside s
 
 ## Key Components
 
-- **version**: Must be set to 2 for the current protocol
-- **apps**: Lists app specifications (each token is an app)
-- **ins**: Specifies the source UTXO(s): 
-  - **utxo_id**: The transaction ID and output index (txid:vout) of the source UTXO
-  - **charms** (optional): Contains the tokens being transferred. Optional: it's there for developer convenience, the Charms prover doesn't need it.
-- **outs**: Defines destination outputs:
-  - **address**: The destination address for the tranferred tokens
-  - **charms**: Describes charms (in this case, the transferred tokens) being created in the output
-  - **sats**: The amount of satoshis for the output (optional, defaults to 1000)
+- **`version`**: Must be set to 2 for the current protocol
+- **`apps`**: Lists app specifications (each token is an app)
+- **`ins`**: Specifies the source UTXO(s): 
+  - **`utxo_id`**: The transaction ID and output index (txid:vout) of the source UTXO
+  - **`charms`** (optional): Contains the tokens being transferred. Optional: it's there for developer convenience, the Charms prover doesn't need it.
+- **`outs`**: Defines destination outputs:
+  - **`address`**: The destination address for the tranferred tokens
+  - **`charms`**: Describes charms (in this case, the transferred tokens) being created in the output
+  - **`sats`**: The amount of satoshis for the output (optional, defaults to 1000)
 
 
 ## Implementation Steps

@@ -53,15 +53,15 @@ The simplest case is when the transaction does **not involve** anything beside s
 
 ## Key Components
 
-- **version**: Must be set to 2 for the current protocol
-- **apps**: Lists app specifications (each NFT is an app)
-- **ins**: Specifies the source UTXO(s): 
-  - **utxo_id**: The transaction ID and output index (txid:vout) of the source UTXO
-  - **charms** (optional): Contains the NFTs being transferred. Optional: it's there for developer convenience, the Charms prover doesn't need it.
-- **outs**: Defines destination output(s):
-  - **address**: The destination address for the tranferred NFT
-  - **charms**: Describes charms (in this case, the transferred NFTs) being created in the output
-  - **sats**: The amount of satoshis for the output (optional, defaults to 1000)
+- **`version`**: Must be set to 2 for the current protocol
+- **`apps`**: Lists app specifications (each NFT is an app)
+- **`ins`**: Specifies the source UTXO(s): 
+  - **`utxo_id`**: The transaction ID and output index (txid:vout) of the source UTXO
+  - **`charms`** (optional): Contains the NFTs being transferred. Optional: it's there for developer convenience, the Charms prover doesn't need it.
+- **`outs`**: Defines destination output(s):
+  - **`address`**: The destination address for the tranferred NFT
+  - **`charms`**: Describes charms (in this case, the transferred NFTs) being created in the output
+  - **`sats`**: The amount of satoshis for the output (optional, defaults to 1000)
 
 ## Implementation Steps
 
@@ -114,12 +114,12 @@ Here's an example of a completed Spell JSON for an NFT transfer:
 ```
 
 **Note:** The following fields are (optional) properties of an NFT charm itself (recommended by [CHIP-420](https://github.com/CharmsDev/charms/blob/main/CHIPs/CHIP-0420)):
-- **ticker**: The ticker or symbol for the charm (e.g., `"ticker": "CHARMIX"`)
-- **name**: The name of the NFT (e.g., `"name": "Panoramix #1"`)
-- **description**: A description of the NFT (e.g., `"description": "An Ancient magician from the Gallia"`)
-- **image**: A URL to the image of the NFT (e.g., `"image": "https://shorturl.at/KfUka"`)
-- **image_hash**: A hash of the image for verification (e.g., `"image_hash": "eb6e19663b72ab41354462cb2d3e03a97a745d0d2874f5d010c9b5c8f2544e9c"`)
-- **url**: A URL for more information about the NFT (e.g., `"url": "https://charms.dev"`)
+- **`ticker`**: The ticker or symbol for the charm (e.g., `"ticker": "CHARMIX"`)
+- **`name`**: The name of the NFT (e.g., `"name": "Panoramix #1"`)
+- `description`: A description of the NFT (e.g., `"description": "An Ancient magician from the Gallia"`)
+- **`image`**: A URL to the image of the NFT (e.g., `"image": "https://shorturl.at/KfUka"`)
+- **`image_hash`**: A hash of the image for verification (e.g., `"image_hash": "eb6e19663b72ab41354462cb2d3e03a97a745d0d2874f5d010c9b5c8f2544e9c"`)
+- **`url`**: A URL for more information about the NFT (e.g., `"url": "https://charms.dev"`)
 - (other fields may be added as needed, depending on the app's requirements)
 
 ## UI Considerations
