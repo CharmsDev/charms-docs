@@ -51,7 +51,7 @@ const requestBody = {
 ### Parameters
 
 - **`spell`**: The Spell JSON object (see [Spell JSON Parameters](/guides/wallet-integration/transactions/spell-json))
-- **`binaries`**: An object containing binary data (empty for basic transfers)
+- **`binaries`**: A map with app binaries (empty for basic transfers): **{** **app VK** (hex-encoded 32 bytes) to **app binary** (base64-encoded RISC-V ELF ) **}**. This is used by the prover to verify the spell against the app contract. The prover will run the program implementing the app contract with the spell data as input, and produce the ZK proof of its successful run, which it will use as input to produce the ZK proof of the spell as a whole.
 - **`prev_txs`**: An array of previous transactions that created the UTXOs being spent, necessary to verify ownership in Bitcoin. Each transaction in the array should be provided in raw hex format.
 - **`funding_utxo`**: The UTXO to use for funding the transaction (txid:vout format). **Must** be a plain Bitcoin output. The BTC from this UTXO is used to pay for the Bitcoin transaction fee and proving fee. The remaining amount is returned to `chage_address`. 
 - **`funding_utxo_value`**: The value of the funding UTXO in satoshis
