@@ -57,16 +57,16 @@ The simplest case is when the transaction does **not involve** anything beside s
 - **apps**: Lists app specifications (each NFT is an app)
 - **ins**: Specifies the source UTXO(s): 
   - **utxo_id**: The transaction ID and output index (txid:vout) of the source UTXO
-  - **charms** (optional): Contains the charm data being transferred. Optional: it's there for developer convenience, the Charms prover doesn't need it.
-- **outs**: Defines destination output(s) for the charm(s):
-  - **address**: The destination address for the charm
-  - **charms**: Describes charms being created in the output
-  - **sats**: The amount of satoshis to be sent (optional, defaults to 1000)
+  - **charms** (optional): Contains the NFTs being transferred. Optional: it's there for developer convenience, the Charms prover doesn't need it.
+- **outs**: Defines destination output(s):
+  - **address**: The destination address for the tranferred NFT
+  - **charms**: Describes charms (in this case, the transferred NFTs) being created in the output
+  - **sats**: The amount of satoshis for the output (optional, defaults to 1000)
 
 ## Implementation Steps
 
 1. **Retrieve Charm Data**: Get the charm's details from the source UTXO
-2. **Construct the Spell JSON**: Fill in the template with the specific charm data (see [Spell JSON Reference](/references/spell-json))
+2. **Construct the Spell JSON**: Fill in the template with the specific NFT data (see [Spell JSON Reference](/references/spell-json))
 3. **Validate the JSON**: Ensure all required fields are present and correctly formatted
 4. **Proceed to Prover API**: Use this JSON in the Prover API call (see [Prover API](/guides/wallet-integration/transactions/prover-api))
 

@@ -47,16 +47,22 @@ Here's the Spell JSON structure for a token transfer:
 }
 ```
 
+:::note
+The simplest case is when the transaction does **not involve** anything beside simple transfers. If it does (e.g. new tokens are minted or any inputs or outputs contain charms that are neither tokens nor NFTs), the transaction must satisfy the app contracts involved. We will describe how to deal with this in the [Prover API](/guides/wallet-integration/transactions/prover-api) section.
+:::
+
 ## Key Components
 
 - **version**: Must be set to 2 for the current protocol
-- **apps**: Contains the transferred token app identifiers and verification keys
-- **ins**: Source UTXOs containing the tokens
-- **outs**: Destination outputs (including change outputs)
+- **apps**: Lists app specifications (each token is an app)
+- **ins**: Specifies the source UTXO(s): 
+  - **utxo_id**: The transaction ID and output index (txid:vout) of the source UTXO
+  - **charms** (optional): Contains the tokens being transferred. Optional: it's there for developer convenience, the Charms prover doesn't need it.
+- **outs**: Defines destination outputs:
+  - **address**: The destination address for the tranferred tokens
+  - **charms**: Describes charms (in this case, the transferred tokens) being created in the output
+  - **sats**: The amount of satoshis for the output (optional, defaults to 1000)
 
-## Important Validation Rule
-
-The total amount of the token in all outputs equals the total amount of the token in the inputs. Spells that do not satisfy this rule with regard to the token app will need to provide the app binary to the Prover API: they need explicit proof that the app contract is satisfied.
 
 ## Implementation Steps
 
@@ -100,6 +106,8 @@ Here's an example of a completed Spell JSON for a token transfer:
   ]
 }
 ```
+
+**Note:** The content of a token charm is simply the amount of the token in the charm. The asset type of the token is fully defined by the app the charm refers to by its key. For example, `t/1dc78849dc544b2d2bca6d698bb30c20f4e5894ec8d9042f1dbae5c41e997334/b22a36379c7c0b1e987f680e33b2263d94f86e2a75063d698ccf842ce6592840` in the above example is the token app specification. The amount of the token in the token charm is `420` in the first output and `419580` in the second output.
 
 ## UI Considerations
 
