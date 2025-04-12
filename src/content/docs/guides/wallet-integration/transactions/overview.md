@@ -4,13 +4,13 @@ sidebar:
   order: 1
 ---
 
-This guide introduces the concepts and processes involved in transacting with Charms assets on the Bitcoin network.
-
 Charms, like other digital assets can be transferred from one address to another, while preserving their unique properties. Charms transactions are inscribed with special pieces of data (called _spells_) within regular Bitcoin transactions. 
 
 A correct spell has a succinct zero-knowledge proof that can be verified by anyone using a Charms client (as CLI, API or library). The containing transaction and its previous transactions (producing the inputs being spent) are the public inputs the proof is verified against. 
 
+:::note
 If a transaction doesn't have a correct spell (for whatever reason) **and** spends outputs with charms, the transaction may still be a valid Bitcoin transaction, but the charms in its inputs are effectively burned if the transaction is accepted in the blockchain.
+:::
 
 ## Asset Preservation Rules
 

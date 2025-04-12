@@ -7,7 +7,10 @@ sidebar:
 NFT transfer involves sending an NFT charm to a new UTXO. We will cover how to send one NFT charm to a single destination. 
 
 :::note
-A transaction can send multiple NFTs to one or more outputs: to achieve that, simply add apps defining those NFTs, add inputs with those NFTs to the list of inputs and add the NFTs to transaction outputs.
+A transaction can send multiple NFTs to one or more outputs. To achieve that 
+1. add apps defining those NFTs, 
+2. add inputs with those NFTs to the list of inputs and 
+3. add the NFTs to transaction outputs.
 :::
 
 ## Spell JSON for NFT Transfers
