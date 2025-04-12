@@ -44,6 +44,10 @@ For NFT transfers, the entire charm is sent to a single destination. Here's the 
 }
 ```
 
+:::note
+The simplest case is when the transaction does **not involve** anything beside simple transfers. If it does (e.g. new NFTs are minted or any inputs or outputs contain charms that are neither tokens nor NFTs), the transaction must satisfy the app contracts involved. We will describe how to deal with this in the [Prover API](/guides/wallet-integration/transactions/prover-api) section.
+:::
+
 ## Key Components
 
 - **version**: Must be set to 2 for the current protocol

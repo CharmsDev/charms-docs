@@ -1,10 +1,10 @@
 ---
-title: Token Transfers
+title: Fungible Token Transfers
 sidebar:
   order: 3
 ---
 
-Token transfers involve sending a portion of tokens to a destination and returning the remainder to a change address. This guide explains how to implement token transfers in your wallet.
+Token transfers involve spending one of more outputs with tokens, and creating one or more destination outputs. This guide explains how to implement token transfers in your wallet.
 
 ## Spell JSON for Token Transfers
 

@@ -22,7 +22,7 @@ There are two types of _simple transfers_ in Charms, corresponding to the two sp
 
 ## The Two-Transaction Model
 
-Charms inscribe spells on transactions using a two-transaction model (similar to [Ordinals](https://docs.ordinals.com/inscriptions.html)):
+Charms cast spells on transactions using a two-transaction model (similar to [Ordinals](https://docs.ordinals.com/inscriptions.html)):
 
 1. **Commit Transaction**: Sets up the transfer by committing to the spell to be inscribed, creating the Taproot output spendable (with a script path) by the spell transaction.
 2. **Spell Transaction**: Reveals the spell (and its proof), spending the Taproot output by presenting the script with the spell data in the witness.
