@@ -77,67 +77,68 @@ Private inputs for proving the transaction against app contracts. This section i
 - `$00`, `$0N`: App references (same as in the `apps` section). Any app from the `apps` section can have an entry here, but it is not required.
 - **`<private input data>`**: Private input data required for the app's proof generation. This data **is not** recorded on-chain.
 
-### ins
+### `ins`
+
+Input UTXOs of the transaction. This section is **required** (can be an empty list — for transactions not spending any outputs with charms).
 
 ```json
 "ins": [
   {
+    "utxo_id": "<txid>:<vout>",
+    "charms": {
+      "$00": <charm data>,
+      "$0m": <charm data>
+    }
+  },
+  {
     "utxo_id": "<source_txid>:<vout>",
     "charms": {
-      "$0000": {
-        "ticker": "<charm_ticker>",
-        "remaining": <total_amount>
-      }
+      "$00": <charm data>,
+      "$0n": <charm data>
     }
   }
 ]
 ```
 
-- **utxo_id**: Transaction ID and output index (txid:vout) where the charm is stored
-- **charms**: Charm data to be transferred
-  - **$0000**: Reference to the app identifier from the apps section
-  - **ticker**: Symbol or name of the charm
-  - **remaining**: Total amount of the charm in this UTXO
+- **`utxo_id`**: Transaction ID and output index (txid:vout) of a UTXO being spent
+- **`charms`**: Charms in the specified UTXO
+  - $00, $0m, $0n: App references (same as in the `apps` section). Any app from the `apps` section can have charms in source UTXOs.
+  - **`<charm data>`**: Depending on the app, this can be a single unsigned integer value (for fungible tokens) or a complex object (for NFTs). For example:
+    - For fungible tokens: `<charm data>` is the amount of the token in the UTXO
+    - For NFTs: `<charm data>` is an object containing metadata properties of the NFT
 
-### outs
+### `outs`
+
+Transaction outputs. This section is **required** (can be an empty list — for transactions not creating any outputs with charms).
 
 ```json
 "outs": [
   {
     "address": "<destination_address>",
     "charms": {
-      "$0000": {
-        "ticker": "<charm_ticker>",
-        "remaining": <transfer_amount>
-      }
+      "$00": <charm data>,
+      "$0m": <charm data>
+    },
+    "sats": 1000
+  },
+  {
+    "address": "<destination_address>",
+    "charms": {
+      "$00": <charm data>,
+      "$0n": <charm data>
     },
     "sats": 1000
   }
 ]
 ```
 
-- **address**: Recipient's Bitcoin address
-- **charms**: Charm data to transfer
-  - **$0000**: Reference to the app identifier from the apps section
-  - **ticker**: Symbol or name of the charm (must match input)
-  - **remaining**: Amount of the charm to transfer to this address
-- **sats**: Amount of satoshis to include with the charm (minimum dust value)
-
-## NFT Properties
-
-Within the `ins` and `outs` sections, the following fields are properties of the NFT itself:
-
-- **ticker**: The unique identifier for the charm (e.g., `"ticker": "<charm_ticker>"`)
-- **remaining**: The total amount of the charm (e.g., `"remaining": <total_amount>`)
-
-These are metadata properties of the charm and can be defined in the app.
-
-## Validation Rules
-
-When constructing a Spell JSON:
-
-1. For token transfers, the sum of `remaining` amounts in all outputs must equal the `remaining` amount in the input
-2. Each output must include a minimum amount of satoshis (typically 1000 sats or the current dust limit)
+- **`address`**: Recipient's Bitcoin address
+- **`charms`**: Charms in the specified UTXO
+  - $00, $0m, $0n: App references (same as in the `apps` section). Any app from the `apps` section can have charms in source UTXOs.
+  - **`<charm data>`**: Depending on the app, this can be a single unsigned integer value (for fungible tokens) or a complex object (for NFTs). For example:
+    - For fungible tokens: `<charm data>` is the amount of the token in the UTXO, e.g. `42` or `69000`
+    - For NFTs: `<charm data>` is an object containing metadata properties of the NFT — see [CHIP-420](https://github.com/CharmsDev/charms/tree/main/CHIPs/CHIP-0420)
+- **`sats`**: Amount of satoshis to include in the output (optional, defaults to 1000, can be as low as the current dust limit)
 
 ## Implementation Tips
 
