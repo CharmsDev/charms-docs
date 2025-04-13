@@ -1,13 +1,14 @@
 ---
 title: Cast a Spell
 sidebar:
-  order: 2
+  order: 3
+next: false
 ---
 
 Now that we have implemented an app, we're ready to cast a spell onto a real Bitcoin transaction. We're going to use
 `bitcoin-cli` to interact with the Bitcoin network.
 
-**Quick note:** Check if you have [pre-requisites](/guides/pre-reqs) installed.
+**Quick note:** Check if you have [pre-requisites](/guides/charms-apps/pre-reqs) installed.
 
 **Important:** we assume `bitcoin-cli` is aliased as `b`:
 
@@ -18,7 +19,7 @@ alias b=bitcoin-cli
 ## Using an app
 
 We've just tested the app with an NFT-minting spell. Let's use it on Bitcoin `testnet4` (we have a node set up
-in [pre-requisites](/guides/pre-reqs)).
+in [pre-requisites](/guides/charms-apps/pre-reqs)).
 
 Prepare:
 ```sh
