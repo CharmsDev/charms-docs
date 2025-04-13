@@ -4,39 +4,78 @@ sidebar:
   order: 1
 ---
 
-The Spell JSON is a critical component of Charms transfers. This reference provides a detailed explanation of each parameter in the Spell JSON format.
+_Spell_ is the metadata added to a Bitcoin transaction to make it also a Charms transaction: spells create charms. This reference provides an explanation of each parameter in the Spell JSON format.
 
 ## Structure Overview
 
-The Spell JSON has four main sections:
+The Spell JSON has the following top-level fields:
 
-1. **version**: Protocol version identifier
-2. **apps**: Application identifiers and verification keys
-3. **ins**: Input UTXOs containing charms
-4. **outs**: Output destinations for charms
+1. **`version`**: Protocol version identifier
+2. **`apps`**: Application identifiers and verification keys
+3. **`public_inputs`**: Public inputs for apps (optional)
+4. **`private_inputs`**: Private inputs for apps (optional) — **not** recorded on-chain.
+5. **`ins`**: Input UTXOs containing charms
+6. **`outs`**: Output destinations for charms
 
 ## Parameter Details
 
-### version
+### `version`
+
+Protocol version number.
 
 ```json
 "version": 2
 ```
 
-- **Description**: Protocol version number
-- **Required Value**: Must be 2 for the current protocol
+**Required Value**: Must be `2` for the current protocol. 
 
-### apps
+Spells exist on-chain with lower versions, and they are recognized by the client, but are not supported by the prover.
+
+### `apps`
+
+Lists apps involved in the transaction. Each app is specified by a **tag**, **identity** and **verification key**.
 
 ```json
 "apps": {
-  "$0000": "n/<app_id>/<app_vk>"
+  "$00": "n/<app_id>/<app_vk>",
+  "$01": "t/<app_id>/<app_vk>"
 }
 ```
 
-- **$0000**: App identifier within the spell (can be any unique identifier)
-- **app_id**: Unique identifier for the application (remains consistent for related NFTs/tokens)
-- **app_vk**: Verification key for the application
+- `$00`, `$01`: App references within the spell (can be any unique identifier)
+- tag: **`n`** — the app represents an NFT, **`t`** — the app represents a fungible token
+- **`<app_id>`**: hex-encoded 32-byte app identity (the same for related NFTs/tokens)
+- **`<app_vk>`**: hex-encoded 32-byte app verification key
+
+There can be multiple apps in the same spell. Apps only different in the tag (e.g. `n` vs `t`) are considered different apps. Such apps can be related (and most likely are), for example, an NFT can manage issuance of a fungible token and carry token metadata (name, ticker symbol, description, logo, website URL, etc.) as recommended in [CHIP-420](https://github.com/CharmsDev/charms/blob/main/CHIPs/CHIP-0420). 
+
+### `public_inputs`
+
+Public inputs for proving the transaction against app contracts. This section is **optional**. It is not needed for simple transfers.
+
+```json
+"public_inputs": {
+  "$00": <public input data for app $00>,
+  "$0N": <public input data for app $0N>
+}
+```
+
+- `$00`, `$0N`: App references (same as in the `apps` section). Any app from the `apps` section can have an entry here, but it is not required.
+- **`<public input data>`**: Public input data required for the app's proof generation. This data **is** recorded on-chain.
+
+### `private_inputs`
+
+Private inputs for proving the transaction against app contracts. This section is **optional**. It is not needed for simple transfers.
+
+```json
+"private_inputs": {
+  "$00": <private input data for app $00>,
+  "$0N": <private input data for app $0N>
+}
+```
+
+- `$00`, `$0N`: App references (same as in the `apps` section). Any app from the `apps` section can have an entry here, but it is not required.
+- **`<private input data>`**: Private input data required for the app's proof generation. This data **is not** recorded on-chain.
 
 ### ins
 
