@@ -34,30 +34,30 @@ export RUST_LOG=info
 
 Run:
 ```sh
-cat ./spells/mint-nft.yaml | envsubst | charms spell cast --app-bins=${app_bins} --funding-utxo=${funding_utxo}
+cat ./spells/mint-nft.yaml | envsubst | charms spell prove --app-bins=${app_bins} --prev-txs=$prev_txs --funding-utxo=$funding_utxo --funding-utxo-value=$funding_utxo_value --change-address=$change_address
 ```
 
-This will create and sign (but not yet submit to the network) two Bitcoin transactions:
+This will create (but not yet sign) two Bitcoin transactions:
 
 - _commit_ transaction and
-- _cast_ transaction.
+- _spell_ transaction.
 
 The _commit_ transaction creates exactly one output (committing to a spell and its proof) which is then spent by the
-_cast_ transaction. The _cast_ transaction contains the spell and proof (in the witness spending the
+_spell_ transaction. The _spell_ transaction contains the spell and proof (in the witness spending the
 output created by the _commit_ tx), and it cannot exist without the _commit_ transaction.
 
 :::note
-Currently, `charms spell prove` and `charms spell cast` take a pretty long time (about 7 minutes). We're working on improving this.
+Currently, `charms spell prove` takes a pretty long time (about 5 minutes). We're working on improving this.
 :::
 
-`charms spell cast` prints the 2 hex-encoded signed transactions at the end of its output, which looks like a JSON
+`charms spell prove` prints the 2 hex-encoded signed transactions at the end of its output, which looks like a JSON
 array (because it is a JSON array):
 
 ```
 ["020000000001015f...57505efa00000000", "020000000001025f...e14c656300000000"]
 ```
 
-You can copy this JSON array of hex strings and submit both transaction to the network as a package:
+You can now sign these transactions. Then submit both to the Bitcoin network as a package:
 
 ```sh
 b submitpackage '["020000000001015f...57505efa00000000", "020000000001025f...e14c656300000000"]'
