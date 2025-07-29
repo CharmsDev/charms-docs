@@ -12,8 +12,9 @@ Install Charms CLI:
 
 ```sh
 ## important to have this end with `/target` (a dependency issue)
+rustup toolchain install nightly
 export CARGO_TARGET_DIR=$(mktemp -d)/target
-cargo install --locked charms
+cargo +nightly install --git https://github.com/CharmsDev/charms.git --tag v0.7.0 charms
 ```
 
 ## Create an app
@@ -22,7 +23,11 @@ This will create a directory initialized with a Git repo for your new Charms app
 
 ```sh
 charms app new my-token
+
 cd ./my-token
+
+unset CARGO_TARGET_DIR
+cargo update
 ```
 
 This will print out the verification key for your new app:
