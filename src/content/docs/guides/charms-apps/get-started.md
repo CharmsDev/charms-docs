@@ -12,9 +12,8 @@ Install Charms CLI:
 
 ```sh
 ## important to have this end with `/target` (a dependency issue)
-rustup toolchain install nightly
 export CARGO_TARGET_DIR=$(mktemp -d)/target
-cargo +nightly install --git https://github.com/CharmsDev/charms.git --tag v0.7.0 charms
+cargo install charms --version=0.9.0
 ```
 
 ## Create an app
