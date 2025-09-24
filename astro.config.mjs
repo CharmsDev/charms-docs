@@ -8,6 +8,10 @@ export default defineConfig({
 		starlight({
 			title: 'Charms',
 			favicon: '/favicon.png',
+			components: {
+				// Override only the SiteTitle component to add BOS branding
+				SiteTitle: './src/components/SiteTitle.astro',
+			},
 			head: [
 				// Add favicon fallback for Safari.
 				{
