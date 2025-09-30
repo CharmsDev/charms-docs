@@ -9,7 +9,7 @@ export default defineConfig({
 			title: 'Charms',
 			favicon: '/favicon.png',
 			components: {
-				// Override only the SiteTitle component to add BOS branding
+				// Override only SiteTitle to inject BOS branding; keep original Header layout
 				SiteTitle: './src/components/SiteTitle.astro',
 			},
 			head: [

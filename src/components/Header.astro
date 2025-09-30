@@ -1,0 +1,120 @@
+---
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+---
+
+<!-- Header override: keep Starlight defaults, inject BOS tagline beside SiteTitle -->
+<div class="sl-flex header">
+  <div class="header-left">
+    <SiteTitle {...(Astro.props as any)} />
+
+    <a href="https://bitcoinos.build/" target="_blank" rel="noopener noreferrer" class="designed-for-bos" aria-label="Designed for BOS - bitcoinos.build">
+      <span class="designed-text">Designed for</span>
+      <svg width="81" height="46" viewBox="0 0 680 386" fill="none" xmlns="http://www.w3.org/2000/svg" class="bos-logo">
+        <rect width="680" height="344" rx="4" fill="transparent"/>
+        <g clip-path="url(#clip0_4151_367)">
+          <path d="M225.332 171.914C225.148 171.253 224.673 170.751 224.067 170.486C223.803 170.381 223.513 170.328 223.25 170.328C222.881 170.328 222.512 170.434 222.169 170.619L219.216 172.337C217.529 173.315 216.475 175.139 216.475 177.096V224.233C216.475 224.973 216.844 225.634 217.503 226.005C218.135 226.375 218.926 226.375 219.559 226.005L234.823 217.175C236.431 216.249 237.222 214.319 236.721 212.522L225.359 171.94L225.332 171.914Z" fill="currentColor"/>
+          <path d="M191.403 161.551L169.337 148.781C169.021 148.596 168.652 148.517 168.309 148.517C167.967 148.517 167.597 148.623 167.281 148.808C166.648 149.178 166.253 149.839 166.253 150.579V197.717C166.253 199.673 167.308 201.497 168.995 202.475L171.341 203.824C172.053 204.247 172.896 204.326 173.714 204.088C174.531 203.85 175.137 203.295 175.506 202.528L192.774 166.045C193.538 164.432 192.932 162.476 191.376 161.577L191.403 161.551Z" fill="currentColor"/>
+          <path d="M210.016 172.337L200.13 166.6C199.418 166.177 198.575 166.098 197.757 166.336C196.966 166.574 196.334 167.129 195.965 167.896L178.697 204.379C177.933 205.992 178.539 207.948 180.094 208.847L209.7 225.978C210.332 226.348 211.097 226.348 211.756 225.978C212.389 225.608 212.784 224.947 212.784 224.207V177.069C212.784 175.113 211.729 173.289 210.042 172.311L210.016 172.337Z" fill="currentColor"/>
+          <path d="M259.076 143.785C259.076 143.045 258.681 142.384 258.048 142.014L250.983 137.942C249.797 137.255 248.452 136.911 247.108 136.911C246.449 136.911 245.816 136.991 245.157 137.149L187.581 152.007C186.816 152.192 186.5 152.8 186.421 153.329C186.342 153.831 186.526 154.518 187.186 154.889L211.834 169.165C213.522 170.143 215.631 170.143 217.318 169.165L258.022 145.609C258.654 145.239 259.05 144.578 259.05 143.838L259.076 143.785Z" fill="currentColor"/>
+          <path d="M261.95 148.782C261.634 148.596 261.265 148.491 260.922 148.491C260.579 148.491 260.21 148.596 259.894 148.755L230.605 165.701C228.997 166.627 228.206 168.557 228.707 170.354L240.069 210.935C240.254 211.596 240.728 212.099 241.335 212.363C241.967 212.601 242.653 212.574 243.233 212.231L260.184 202.423C261.871 201.444 262.926 199.62 262.926 197.664V150.553C262.926 149.813 262.53 149.152 261.897 148.782H261.95Z" fill="currentColor"/>
+          <path d="M171.184 145.583L176.588 148.729C178.354 149.76 180.41 150.024 182.388 149.522L239.963 134.664C240.702 134.479 241.044 133.871 241.123 133.369C241.202 132.866 241.018 132.179 240.359 131.809L217.344 118.458C216.501 117.956 215.552 117.718 214.603 117.718C213.654 117.718 212.705 117.956 211.861 118.458L171.184 142.014C170.551 142.384 170.155 143.045 170.155 143.785C170.155 144.525 170.524 145.186 171.184 145.556V145.583Z" fill="currentColor"/>
+        </g>
+        <path d="M341.906 209.434H299.182V134.567H342.405C353.785 134.567 362.27 139.358 362.27 152.235V155.629C362.27 164.513 356.48 168.806 350.89 169.904C357.678 170.702 364.965 174.595 364.965 186.674V190.567C364.965 204.542 354.484 209.434 341.906 209.434ZM331.026 148.142H321.243V164.913H331.026C337.913 164.913 340.808 161.918 340.808 156.627C340.808 151.137 337.913 148.142 331.026 148.142ZM332.523 178.289H321.243V195.558H332.523C339.411 195.558 342.705 192.863 342.705 186.874C342.705 180.884 339.411 178.289 332.523 178.289Z" fill="currentColor"/>
+        <path d="M442.995 176.292C442.995 199.751 431.415 210.332 413.447 210.332H399.173C381.205 210.332 369.625 199.751 369.625 176.292V167.708C369.625 144.249 381.205 133.668 399.173 133.668H413.447C431.415 133.668 442.995 144.249 442.995 167.708V176.292ZM392.784 172.1C392.784 188.471 396.178 196.556 406.36 196.556C416.442 196.556 419.836 188.471 419.836 172.1C419.836 155.729 416.442 147.444 406.36 147.444C396.178 147.444 392.784 155.729 392.784 172.1Z" fill="currentColor"/>
+        <defs>
+          <clipPath id="clip0_4151_367">
+            <rect width="96.7241" height="110" fill="white" transform="translate(166.483 117)"/>
+          </clipPath>
+        </defs>
+      </svg>
+    </a>
+  </div>
+
+  <div class="header-right">
+    <div class="social-icons sl-hidden md:sl-flex">
+      <SocialIcons {...(Astro.props as any)} />
+    </div>
+    <LanguageSelect {...(Astro.props as any)} />
+    <div class="spacer" aria-hidden="true"></div>
+    <div class="search-wrap">
+      <Search {...(Astro.props as any)} />
+    </div>
+    <ThemeSelect {...(Astro.props as any)} />
+  </div>
+</div>
+
+<style>
+  .header {
+    gap: var(--sl-nav-gap);
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    min-height: 72px; /* accommodate larger logo */
+    padding: 0 0.5rem;
+    position: relative;
+    z-index: 1;
+    /* Ensure Charms logo prominence (double size) */
+    --sl-logo-height: 64px;
+  }
+
+  .header-left { display: inline-flex; align-items: center; min-width: 0; flex: 0 1 auto; gap: 0.5rem; }
+  .header-right { display: inline-flex; align-items: center; gap: 0.75rem; flex: 1 1 auto; width: 100%; }
+  .spacer { flex: 1 1 auto; }
+  .search-wrap { display: inline-flex; align-items: center; align-self: center; }
+  .header-right > :last-child { margin-right: 0; }
+
+  .designed-for-bos {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 1.5rem; /* match wallet space-x-6 ~ 24px */
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    gap: 0.3rem;
+    white-space: nowrap;
+  }
+  .designed-for-bos:hover { opacity: 0.8; }
+
+  .designed-text {
+    font-size: 0.875rem; /* text-sm */
+    color: #000000;
+    white-space: nowrap;
+    transform: translateY(5px);
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .bos-logo {
+    opacity: 0.9;
+    transform: translateY(8px);
+    margin-left: -13px;
+    color: #000000;
+    flex-shrink: 0;
+  }
+  :global([data-theme='dark']) .designed-text { color: #ffffff; }
+  :global([data-theme='dark']) .bos-logo { color: #ffffff; }
+
+  .social-icons { display: inline-flex; align-items: center; gap: 1rem; }
+
+  /* Hide tagline on very small screens to avoid wrapping */
+  @media (max-width: 420px) { .designed-for-bos { display: none; } }
+  @media (max-width: 720px) {
+    .designed-text { font-size: 0.8rem; transform: translateY(4px); }
+    .bos-logo { transform: translateY(7px); }
+  }
+
+  /* Do not switch to grid/display: contents here; keep simple flex to avoid overlap with announcement bar */
+
+  /* Restore Charms logo visual size like default header */
+  :global(.site-title) img.logo, :global(.site-title) img[alt][src] {
+    height: var(--sl-logo-height);
+    width: auto;
+  }
+  :global(.site-title) { display: inline-flex; align-items: center; }
+  @media (max-width: 720px) {
+    :global(.site-title) img.logo, :global(.site-title) img[alt][src] { height: 44px; }
+  }
+</style>
