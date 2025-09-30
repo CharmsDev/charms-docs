@@ -99,11 +99,27 @@ import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 
   .social-icons { display: inline-flex; align-items: center; gap: 1rem; }
 
-  /* Hide tagline on very small screens to avoid wrapping */
-  @media (max-width: 420px) { .designed-for-bos { display: none; } }
+  /* Mobile responsive adjustments */
   @media (max-width: 720px) {
-    .designed-text { font-size: 0.8rem; transform: translateY(4px); }
-    .bos-logo { transform: translateY(7px); }
+    .designed-text { font-size: 0.75rem; transform: translateY(3px); }
+    .bos-logo { 
+      transform: translateY(6px) scale(0.8); 
+      margin-left: -8px;
+    }
+    .designed-for-bos { 
+      margin-left: 0.75rem; 
+      gap: 0.2rem;
+    }
+  }
+  
+  /* Very small screens - show only BOS logo */
+  @media (max-width: 380px) { 
+    .designed-text { display: none; }
+    .designed-for-bos { margin-left: 0.5rem; }
+    .bos-logo { 
+      transform: translateY(4px) scale(0.7); 
+      margin-left: 0;
+    }
   }
 
   /* Do not switch to grid/display: contents here; keep simple flex to avoid overlap with announcement bar */
