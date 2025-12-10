@@ -24,7 +24,7 @@ The Spell JSON has the following top-level fields:
 Protocol version number.
 
 ```json
-"version": 2
+"version": 8
 ```
 
 **Required Value**: Must be `2` for the current protocol. 

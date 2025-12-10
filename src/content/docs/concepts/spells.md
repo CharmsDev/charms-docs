@@ -49,7 +49,7 @@ where:
 Here is an example of a spell that sends an NFT and some fungible tokens, and also mints some tokens:
 
 ```yaml
-version: 1
+version: 8
 
 apps:
   $0000: n/f54f6d40bd4ba808b188963ae5d72769ad5212dd1d29517ecc4063dd9f033faa/7df792057addc74f1a6ca23da5b8b82475a7c31c3a4d45266c16a604c62eba4c

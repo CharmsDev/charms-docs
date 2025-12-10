@@ -19,7 +19,7 @@ For NFT transfers, the entire charm is sent to a single destination. Here's the 
 
 ```json
 {
-  "version": 2,
+  "version": 8,
   "apps": {
     "$00": "n/<app_id>/<app_vk>"
   },
@@ -76,7 +76,7 @@ Here's an example of a completed Spell JSON for an NFT transfer:
 
 ```json
 {
-  "version": 2,
+  "version": 8,
   "apps": {
     "$00": "n/af50d82d1e47e77ef5d03d1f6a1280eb137c91a51d696edcc0d2cc9351659508/a0029d4e7f8ba7361cde6004561c6209d968bd3686c456504cd0005e19ac1a2f"
   },
