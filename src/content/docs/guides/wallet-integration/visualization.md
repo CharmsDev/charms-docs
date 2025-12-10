@@ -8,51 +8,89 @@ To display Charms assets in your wallet, you'll need to fetch data from the Char
 
 ## Fetching Charms Data
 
-To get all Charms associated with a specific UTXO, call the following API endpoint:
+To get all Charms associated with a specific UTXO, you can use charms_lib.wasm module (available as a Charms [release artifact](https://github.com/CharmsDev/charms/releases), can be built from the source at [Charms GitHub](https://github.com/CharmsDev/charms/tree/main/charms-lib)). 
 
-```http request
-GET https://api-t4.charms.dev/spells/<txid>
+
+To create JS bindings for the WASM module:
+
+```sh
+wasm-bindgen --out-dir target/wasm-bindgen-nodejs --target nodejs path/to/charms_lib.wasm
 ```
-
-Replace `<txid>` with the Bitcoin transaction ID you want to query.
-
-Alternatively, use a PUT request with the same URL, but use the request body to provide the full hex-encoded transaction (`<txid>` in the URL **must** correspond to the transaction in the request body):
-
-```http request
-PUT https://api-t4.charms.dev/spells/<txid>
-Content-Type: application/json
-
-{
-  "tx_hex": "<hex-encoded transaction>"
-}
-```
-
-Both methods will return the same result, but the PUT method allows you to provide a transaction that may not yet have been broadcasted.
-
 
 ### Example
 
-```http request
-GET https://api-t4.charms.dev/spells/1acee7fb7c922b205e7c63abffe39a53527d4d7bbb0e5327a9b72350115a7ebb
-```
-
-Or
-
-```http request
-PUT https://api-t4.charms.dev/spells/1acee7fb7c922b205e7c63abffe39a53527d4d7bbb0e5327a9b72350115a7ebb
-Content-Type: application/json
-
+Bitcoin transaction (`bitcoin-tx.json`):
+```json
 {
-  "tx_hex": "02000000000102fbe73ccd1b36ff2b27f187333ad5d552eb104721855c7b53bb668ffb5375f3f80000000000ffffffffa67820e9662ef91c25e298452266f834282f9438e75fcc771fe66ccfd72d4bdd0000000000ffffffff02e803000000000000225120797226ba06796cd1043402f9b0a960bb3d5911b3eb159c2c7f23f02bb201d41ce4670200000000002251200e5de7f8ac4370c8241fea5496407aae321c94df32980eac51673598d7de0abb014098b6635a33147d3b6b6113eff3c401b0357a301267212b1e3af0809b01785e093b7f93ab3c0ff8f9d66e95ba8b4d7c97e6006d8ab504664c2b23268e51dd1dd60341024d428bdba20da5ef78b3dc8af290704dd68cbc9906dd85f1c5e925f151d6bad2c2bb6a6320a65216cabf3fe26ead1c6ced2964ac2e097e9fee5ecb43a16b2281fdf5020063057370656c6c4d080282a36776657273696f6e02627478a2647265667380646f75747381a100a2667469636b657268434841524d532d366972656d61696e696e671a000186a0716170705f7075626c69635f696e70757473a183616e98201857188a185b18af18d318ac0418ef183618da0818cb18e618210018cd05186f18c3188118fd1837188318de186e184618fc187418fc187c182718b298200618ff1853182218ce182d183d182318ab18a0184418181828186918da091842189e18f2182b183b181d18a30e1824187c182a183d187b187518d01839f69901041118b618a0189d0918f618cf189818d8183918cb185318a904188f18230b181b16185b18d0187818fb184518bc18c918bf18c5188f1618cf182d183718b2183d18a50f184018a21821188f0e185b18f318721840184718ae183d1840188b18b818271018d7182b18fe18ac1825186b187d18341847181d187318f41858160409184016187818331870187b18bd18f4183a0018f518a4188a186d182318d618ea181a182a188f188f182118e818aa18ae18a918a118b7187f18bf182f18bf1874184f1899189b186d184c18bc181e18ce185b18301893187018ad1852189218a818e718201854183418d718e418b218eb0718ab183118891833182f183818fb1869183b18f318bd18fb18b6182a189a08187818e1187f18e318511856185e185b18581885181e101898185a182d1838189b1878184cbd521890182d18fa186f18f218f0182e18d2181b18fb18de188c186b18a318d8188318d018231855181e18ff18b218200318ca18bb18461866189b18a61839182418d6182918f00c18b018a818511877186018b018a6188518a318bd186518660f0f1839182e1859184e18351898183a182918a818e51888184a1830188d182f0318f918d718b518511875187d181e1831189018d1182518ea18dd188c184e18ba17189f18d5189618f518a2185718b91857189418bd1863187918551878682074e32d2ccd9a8909402411911707e9dbd87f072e5225db989320892096ebd684ac21c074e32d2ccd9a8909402411911707e9dbd87f072e5225db989320892096ebd68400000000"
+  "bitcoin": "020000000001024c24d84d55241594f59337265d8bdae0bbfce8841b2d667d45129a75ea92aa130100000000ffffffffe1562b13c190c62084ee16cbf1feb354dd9029822bbb821010ba70a452c9bfc50000000000ffffffff02e803000000000000225120ec52e2809d78721dc1444ef22749b8e73c0c8f59cad4f70e7af4b13d305a2874580900000000000016001445d77e6d194773f086df5ee258d1803ea5d27b4901405495c9e8f8fca5f20fcf5130e944111d150986b67065a5030167d8f27c893c1304ffdfd8ffdece713882b0a01b4eb91912bd667b0a21cc86b73d11508444cdd80341d6516f4c39207cf3c14986997b57d069bf1e5e60b39ce867ac1a102cf56e71e49964b6ddb256c5070902c42e606af3a538ab156e19706990f7ca39ab27d53b7581fddd020063057370656c6c4d080282a36776657273696f6e07627478a1646f75747381a1001b00000009502f9000716170705f7075626c69635f696e70757473a18361749820183d187f18e718e418ce18a6121819184718af187318d70e1851181918be18bd188a18a518b718ed18fe187418bf18af186e1877189a1818184718bd189b982018c9187518d418e018c2189218fb189518ef18bd18a518c118331218d618ac181d188b185a18ef18f718f018f118e518571886184518a218da187018ff185ff699010418a41859184c1859181e18501884185d18701851187b188518181856189a18d80d1823184018cc182d18e118ed184918f4183f18c718e818e318e5081829184b1859188918a7181e18480e1833186518c518e006182018f318180a1872183f18da1887185e186f0e18ac1879187218740718e21826185b18f618d30a18da18df1820183f18d0186a184a183a10183e18ec18431823188518af18a91888186c184e183618ec189418bf1844183018ee181f186a18e01832188f0f187918ec181f09186318d818ae1849189f186f1318bd18a41877187318591860188b18ae182118b0189818dd18bd18f118ce18ee187b182318a6185a18d2188818aa0f18ab182d185918291218eb189c18e7182618a418e3182e1882189418891829185f18211871189418d9188a185e189118dd18861898187518cd09181d0918701856181c186a181a18a1184118791826184ca533185418a418591883182e1821183a18dc18ab18c318cc18b4181918c9040c0018e0186718581869181818a81898181b1888186318e8185f189c188a1869186818351857185018c31882184818af184618f618ac185e18a418db1898185c18c91879189e181a18d216187b185918f218db18fa1831185818e7187e186318c318ee184b182209188d1831186e1846186b184718d518f01875188718b90718f3188f18b018446820adcd6a7d4ea97319846d90c15b30609bf0174cb0c0f9c032e626009b6185cb17ac21c1adcd6a7d4ea97319846d90c15b30609bf0174cb0c0f9c032e626009b6185cb1700000000"
 }
 ```
 
+Simpe JavaScript test demonstrating how to use the API (`extractAndVerifySpell.node.test.js`):
+
+```js
+const assert = require('assert');
+const path = require('path');
+const fs = require('fs');
+
+function main() {
+  const wasmModulePath = path.resolve(__dirname, 'path/to/wasm-bindgen-nodejs/charms_lib.js');
+  // Ensure wasm artifacts exist
+  assert.ok(fs.existsSync(wasmModulePath), `Wasm JS glue not found at ${wasmModulePath}`);
+
+  const wasm = require(wasmModulePath);
+  assert.ok(typeof wasm.extractAndVerifySpell === 'function', 'extractAndVerifySpell export not found');
+
+  const txJsonPath = path.resolve(__dirname, './bitcoin-tx.json');
+  assert.ok(fs.existsSync(txJsonPath), `Sample tx JSON not found at ${txJsonPath}`);
+
+  const tx = JSON.parse(fs.readFileSync(txJsonPath, 'utf8'));
+
+  // Invoke the wasm function extractAndVerifySpell
+  const res = wasm.extractAndVerifySpell(tx, false);
+  console.log('[extractAndVerifySpell.test] OK');
+  console.log('%o', res);
+}
+
+if (require.main === module) {
+  try {
+    main();
+  } catch (err) {
+    console.error('[extractAndVerifySpell.test] FAILED');
+    console.error(err);
+    process.exit(1);
+  }
+}
+```
+
+Run the test:
+
+```sh
+node extractAndVerifySpell.node.test.js
+```
+
+This will print the Charms spell data:
+
+```
+[extractAndVerifySpell.test] OK
+{
+  version: 7,
+  tx: {
+    ins: [
+      '13aa92ea759a12457d662d1b84e8fcbbe0da8b5d263793f5941524554dd8244c:1',
+      [length]: 1
+    ],
+    outs: [ Map(1) { 0 => 40000000000 }, [length]: 1 ]
+  },
+  app_public_inputs: Map(1) {
+    't/3d7fe7e4cea6121947af73d70e5119bebd8aa5b7edfe74bfaf6e779a1847bd9b/c975d4e0c292fb95efbda5c13312d6ac1d8b5aeff7f0f1e5578645a2da70ff5f' => undefined
+  }
+}
+```
 
 ## API Response Structure
 
-The REST API above is roughly equivalent to the `charms tx show-spell` CLI command, and to [`charms_client::tx::extract_and_verify_spell`](https://docs.rs/charms-client/latest/charms_client/tx/fn.extract_and_verify_spell.html) function in the `charms-client` Rust library.
-
-The API returns a JSON object containing information about the Charms _spell_ describing all Charms in the outputs of the specified transaction. The response includes:
+The `extractAndVerifySpell(tx, mock)` function returns the Charms _spell_ object, describing all Charms in the outputs of the specified transaction. The response includes:
 
 - Charms App Specifications, each containing:
   - tag ('n' for NFTs, 't' for fungible tokens)
@@ -60,37 +98,11 @@ The API returns a JSON object containing information about the Charms _spell_ de
   - verification key (a 32-byte verification key of the app's compiled code)
 - Input Specifications, each containing:
   - UTXO ID of the input
-- Output Specifications with Charms — mappings of App spec (referred to by a string like `$0001`) to Charm content, which may be:
+- Output Specifications with Charms — mappings of App spec (referred by an index) to Charm content, which may be:
   - Amounts (for fungible tokens)
   - Arbitrary data (for NFTs and other types of charms)
 
 NFTs are recommended (but not required) to adhere to [CHIP-0420](https://github.com/CharmsDev/charms/tree/main/CHIPs/CHIP-0420) for structuring their content.
-
-### Example Response
-
-```json
-{
-  "version": 2,
-  "apps": {
-    "$0000": "n/578a5bafd3ac04ef36da08cbe62100cd056fc381fd3783de6e46fc74fc7c27b2/06ff5322ce2d3d23aba044182869da09429ef22b3b1da30e247c2a3d7b75d039"
-  },
-  "ins": [
-    {
-      "utxo_id": "f8f37553fb8f66bb537b5c85214710eb52d5d53a3387f1272bff361bcd3ce7fb:0"
-    }
-  ],
-  "outs": [
-    {
-      "charms": {
-        "$0000": {
-          "ticker": "CHARMS-6",
-          "remaining": 100000
-        }
-      }
-    }
-  ]
-}
-```
 
 ## Displaying Charms in Your Wallet
 
@@ -106,13 +118,3 @@ When implementing Charms visualization in your wallet:
 - For NFTs, prominently display the image and name
 - For tokens, show the quantity alongside the token name/symbol + image
 - Include options for viewing detailed metadata (review Charms Token Metadata specification [CHIP-0420](https://github.com/CharmsDev/charms/tree/main/CHIPs/CHIP-0420))
-
-## Testing
-
-For testing purposes, you can use the API endpoint for Charms on [Bitcoin Testnet4](https://mempool.space/testnet4): 
-
-```
-https://api-t4.charms.dev/spells/<txid>
-```
-
-This allows to develop and test wallet integration without using mainnet assets and paying fees with real BTC.

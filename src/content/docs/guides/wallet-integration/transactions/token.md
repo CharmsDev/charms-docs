@@ -12,7 +12,7 @@ Here's the Spell JSON structure for a token transfer:
 
 ```json
 {
-  "version": 2,
+  "version": 8,
   "apps": {
     "$00": "t/<app_id>/<app_vk>"
   },
@@ -78,7 +78,7 @@ Here's an example of a completed Spell JSON for a token transfer:
 
 ```json
 {
-  "version": 2,
+  "version": 8,
   "apps": {
     "$01": "t/1dc78849dc544b2d2bca6d698bb30c20f4e5894ec8d9042f1dbae5c41e997334/b22a36379c7c0b1e987f680e33b2263d94f86e2a75063d698ccf842ce6592840"
   },
