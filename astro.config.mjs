@@ -27,10 +27,18 @@ export default defineConfig({
 				replacesTitle: true,
 				dark: './src/assets/logo-charms-dark.png',
 			},
-			social: {
-				"x.com": 'https://x.com/CharmsDev',
-				github: 'https://github.com/CharmsDev/charms',
-			},
+			social: [
+				{
+					href: 'https://x.com/CharmsDev',
+					label: "X",
+					icon: "x.com"
+				},
+				{
+					href: 'https://github.com/CharmsDev/charms',
+					icon: "github",
+					label: "GitHub"
+				},
+			],
 			sidebar: [
 				{
 					label: 'Concepts',
