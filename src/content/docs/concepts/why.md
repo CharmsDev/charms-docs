@@ -8,11 +8,7 @@ sidebar:
 Charms is a **programmable assets** protocol and software for Bitcoin (and soon, cross-chain), designed to be
 **developer-friendly**. 
 
-:::tip
-The Charms protocol was originally designed for [BOS](https://bitcoinos.build).
-:::
-
-But there are already a few token standards out there, even **on Bitcoin**, why create another one?
+Q: There are already a few token standards out there, even on Bitcoin. why create another one?
 
 In short, because none of them are **programmable**, or particularly developer friendly. And we are fixing this.
 
