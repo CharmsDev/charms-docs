@@ -30,13 +30,13 @@ export default defineConfig({
 			social: [
 				{
 					href: 'https://x.com/CharmsDev',
-					label: "X",
-					icon: "x.com"
+					label: 'X',
+					icon: 'x.com',
 				},
 				{
 					href: 'https://github.com/CharmsDev/charms',
-					icon: "github",
-					label: "GitHub"
+					icon: 'github',
+					label: 'GitHub',
 				},
 			],
 			sidebar: [
