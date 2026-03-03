@@ -12,38 +12,34 @@ Here's the Spell JSON structure for a token transfer:
 
 ```json
 {
-  "version": 8,
-  "apps": {
-    "$00": "t/<app_id>/<app_vk>"
+  "version": 11,
+  "tx": {
+    "ins": [
+      "<source_txid_1>:<vout_1>",
+      "<source_txid_N>:<vout_N>"
+    ],
+    "outs": [
+      {
+        "0": <dest_amount_1>
+      },
+      {
+        "0": <dest_amount_N>
+      }
+    ],
+    "coins": [
+      {
+        "amount": 1000,
+        "dest": "<destination_hex_1>"
+      },
+      {
+        "amount": 1000,
+        "dest": "<destination_hex_N>"
+      }
+    ]
   },
-  "ins": [
-    {
-      "utxo_id": "<source_txid_1>:<vout_1>",
-      "charms": {
-        "$00": <amount_1>
-      }
-    },
-    {
-      "utxo_id": "<source_txid_N>:<vout_N>",
-      "charms": {
-        "$00": <amount_N>
-      }
-    }
-  ],
-  "outs": [
-    {
-      "address": "<dest_address_1>",
-      "charms": {
-        "$00": <dest_amount_1>
-      }
-    },
-    {
-      "address": "<dest_address_N>",
-      "charms": {
-        "$00": <dest_amount_N>
-      }
-    }
-  ]
+  "app_public_inputs": {
+    "t/<app_id>/<app_vk>": null
+  }
 }
 ```
 
@@ -53,23 +49,19 @@ The simplest case is when the transaction does **not involve** anything beside s
 
 ## Key Components
 
-- **`version`**: Must be set to 2 for the current protocol
-- **`apps`**: Lists app specifications (each token is an app)
-- **`ins`**: Specifies the source UTXO(s): 
-  - **`utxo_id`**: The transaction ID and output index (txid:vout) of the source UTXO
-  - **`charms`** (optional): Contains the tokens being transferred. Optional: it's there for developer convenience, the Charms prover doesn't need it.
-- **`outs`**: Defines destination outputs:
-  - **`address`**: The destination address for the tranferred tokens
-  - **`charms`**: Describes charms (in this case, the transferred tokens) being created in the output
-  - **`sats`**: The amount of satoshis for the output (optional, defaults to 1000)
+- **`version`**: Must be `11` for Charms `v11.0.1`
+- **`app_public_inputs`**: Lists apps involved in the spell (for simple token transfers use `null` value)
+- **`tx.ins`**: Source UTXO list (`txid:vout`)
+- **`tx.outs`**: Destination charm outputs, keyed by app index (`"0"`, `"1"`, ...)
+- **`tx.coins`**: Native coin outputs; `dest` is a hex destination (`charms util dest`)
 
 
 ## Implementation Steps
 
-1. **Retrieve Token Data**: Collect the source UTXOs and their token amounts.
-2. **Calculate Amounts**: Determine the transfer and change amounts
-3. **Construct the Spell JSON**: Fill in the template with the specific token data (see [Spell JSON Reference](/references/spell-json))
-4. **Validate the JSON**: Ensure all required fields are present and correctly formatted
+1. **Retrieve Token Data**: Collect source UTXOs and token amounts
+2. **Calculate Amounts**: Determine transfer and change token amounts
+3. **Construct the Spell JSON**: Fill in `tx` and `app_public_inputs` (see [Spell JSON Reference](/references/spell-json))
+4. **Add Coin Outputs**: Build `tx.coins` entries (`amount`, `dest`) for Bitcoin outputs
 5. **Proceed to Prover API**: Use this JSON in the Prover API call (see [Prover API](/guides/wallet-integration/transactions/prover-api))
 
 ## Example
@@ -78,36 +70,37 @@ Here's an example of a completed Spell JSON for a token transfer:
 
 ```json
 {
-  "version": 8,
-  "apps": {
-    "$01": "t/1dc78849dc544b2d2bca6d698bb30c20f4e5894ec8d9042f1dbae5c41e997334/b22a36379c7c0b1e987f680e33b2263d94f86e2a75063d698ccf842ce6592840"
+  "version": 11,
+  "tx": {
+    "ins": [
+      "55777ba206bf747724a4e96586f2d912a77baa8a15a4c63a0b510531ad5fa65e:0"
+    ],
+    "outs": [
+      {
+        "0": 420
+      },
+      {
+        "0": 419580
+      }
+    ],
+    "coins": [
+      {
+        "amount": 1000,
+        "dest": "2f7e10b8f6e2089b5bb5dcce96e8dd49ca01012f6506af0fe7bf5d2f2f5db531"
+      },
+      {
+        "amount": 1000,
+        "dest": "009fb48961bca8ec68f01ec882f7ec0dc7dc5cc6bcf4ad154f129ea2338f6cd1"
+      }
+    ]
   },
-  "ins": [
-    {
-      "utxo_id": "55777ba206bf747724a4e96586f2d912a77baa8a15a4c63a0b510531ad5fa65e:0",
-      "charms": {
-        "$01": 420000
-      }
-    }
-  ],
-  "outs": [
-    {
-      "address": "tb1pyrznm3ma6cl83qljqhw8z2usyjcxtkx9tkrqfuhjgrpsuarxcn8s0ut5qs",
-      "charms": {
-        "$01": 420
-      }
-    },
-    {
-      "address": "tb1phmk7c9mzaepumgeaz9lgly9qurkq6jxd44qssfd3w5563j49mfwqfrqvww",
-      "charms": {
-        "$01": 419580
-      }
-    }
-  ]
+  "app_public_inputs": {
+    "t/1dc78849dc544b2d2bca6d698bb30c20f4e5894ec8d9042f1dbae5c41e997334/b22a36379c7c0b1e987f680e33b2263d94f86e2a75063d698ccf842ce6592840": null
+  }
 }
 ```
 
-**Note:** The content of a token charm is simply the amount of the token in the charm. The asset type of the token is fully defined by the app the charm refers to by its key. For example, `t/1dc78849dc544b2d2bca6d698bb30c20f4e5894ec8d9042f1dbae5c41e997334/b22a36379c7c0b1e987f680e33b2263d94f86e2a75063d698ccf842ce6592840` in the above example is the token app specification. The amount of the token in the token charm is `420` in the first output and `419580` in the second output.
+**Note:** The content of a token charm is the token amount. In `tx.outs`, the app index `"0"` refers to the first app in `app_public_inputs`.
 
 ## UI Considerations
 

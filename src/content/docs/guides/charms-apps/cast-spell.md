@@ -27,8 +27,6 @@ app_bin=$(charms app build)
 
 # pick from the output of `bitcoin-cli listunspent`
 # should NOT be the same as the one you used for minting the NFT
-funding_utxo="2d6d1603f0738085f2035d496baf2b91a639d204b414ea180beb417a3e09f84e:1"
-funding_utxo_value="50000" # in sats
 change_address=$(b getrawchangeaddress)
 
 export RUST_LOG=info
@@ -36,7 +34,7 @@ export RUST_LOG=info
 
 Run:
 ```sh
-cat ./spells/mint-nft.yaml | envsubst | charms spell prove --app-bins=${app_bin} --prev-txs=$prev_txs --funding-utxo=$funding_utxo --funding-utxo-value=$funding_utxo_value --change-address=$change_address
+cat ./spells/mint-nft.yaml | envsubst | charms spell prove --app-bins=${app_bin} --prev-txs=$prev_txs --change-address=$change_address
 ```
 
 This will create (but not yet sign) two Bitcoin transactions:

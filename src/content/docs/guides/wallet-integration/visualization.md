@@ -8,7 +8,7 @@ To display Charms assets in your wallet, you'll need to fetch data from the Char
 
 ## Fetching Charms Data
 
-To get all Charms associated with a specific UTXO, you can use charms_lib.wasm module (available as a Charms [release artifact](https://github.com/CharmsDev/charms/releases), can be built from the source at [Charms GitHub](https://github.com/CharmsDev/charms/tree/main/charms-lib)). 
+To get all Charms associated with a specific UTXO, you can use charms_lib.wasm module (available as a Charms [release artifact](https://github.com/CharmsDev/charms/releases), can be built from the source at [Charms GitHub](https://github.com/CharmsDev/charms/tree/v11.0.1/charms-lib)). 
 
 
 To create JS bindings for the WASM module:
@@ -74,7 +74,7 @@ This will print the Charms spell data:
 ```
 [extractAndVerifySpell.test] OK
 {
-  version: 7,
+  version: 11,
   tx: {
     ins: [
       '13aa92ea759a12457d662d1b84e8fcbbe0da8b5d263793f5941524554dd8244c:1',
@@ -102,7 +102,7 @@ The `extractAndVerifySpell(tx, mock)` function returns the Charms _spell_ object
   - Amounts (for fungible tokens)
   - Arbitrary data (for NFTs and other types of charms)
 
-NFTs are recommended (but not required) to adhere to [CHIP-0420](https://github.com/CharmsDev/charms/tree/main/CHIPs/CHIP-0420) for structuring their content.
+NFTs are recommended (but not required) to adhere to [CHIP-0420](https://github.com/CharmsDev/charms/tree/v11.0.1/CHIPs/CHIP-0420) for structuring their content.
 
 ## Displaying Charms in Your Wallet
 
@@ -117,4 +117,4 @@ When implementing Charms visualization in your wallet:
 
 - For NFTs, prominently display the image and name
 - For tokens, show the quantity alongside the token name/symbol + image
-- Include options for viewing detailed metadata (review Charms Token Metadata specification [CHIP-0420](https://github.com/CharmsDev/charms/tree/main/CHIPs/CHIP-0420))
+- Include options for viewing detailed metadata (review Charms Token Metadata specification [CHIP-0420](https://github.com/CharmsDev/charms/tree/v11.0.1/CHIPs/CHIP-0420))

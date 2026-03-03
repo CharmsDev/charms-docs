@@ -13,7 +13,7 @@ Install Charms CLI:
 ```sh
 ## important to have this end with `/target` (a dependency issue)
 export CARGO_TARGET_DIR=$(mktemp -d)/target
-cargo install charms --version=0.10.0
+cargo install --locked charms
 ```
 
 ## Create an app
@@ -24,9 +24,6 @@ This will create a directory initialized with a Git repo for your new Charms app
 charms app new my-token
 
 cd ./my-token
-
-unset CARGO_TARGET_DIR
-cargo update
 ```
 
 This will print out the verification key for your new app:

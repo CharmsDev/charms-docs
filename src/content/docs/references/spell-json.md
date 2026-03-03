@@ -11,11 +11,9 @@ _Spell_ is the metadata added to a Bitcoin transaction to make it also a Charms 
 The Spell JSON has the following top-level fields:
 
 1. **`version`**: Protocol version identifier
-2. **`apps`**: Application identifiers and verification keys
-3. **`public_inputs`**: Public inputs for apps (optional)
-4. **`private_inputs`**: Private inputs for apps (optional) — **not** recorded on-chain.
-5. **`ins`**: Input UTXOs containing charms
-6. **`outs`**: Output destinations for charms
+2. **`tx`**: Normalized transaction payload (`ins`, `refs`, `outs`, optional `beamed_outs`, optional `coins`)
+3. **`app_public_inputs`**: App definitions and public input data
+4. **`mock`**: Optional boolean used for mock proving
 
 ## Parameter Details
 
@@ -24,124 +22,104 @@ The Spell JSON has the following top-level fields:
 Protocol version number.
 
 ```json
-"version": 8
+"version": 11
 ```
 
-**Required Value**: Must be `2` for the current protocol. 
+**Required Value**: Must be `11` for Charms CLI `v11.0.1`.
 
 Spells exist on-chain with lower versions, and they are recognized by the client, but are not supported by the prover.
 
-### `apps`
+### `tx`
 
-Lists apps involved in the transaction. Each app is specified by a **tag**, **identity** and **verification key**.
-
-```json
-"apps": {
-  "$00": "n/<app_id>/<app_vk>",
-  "$01": "t/<app_id>/<app_vk>"
-}
-```
-
-- `$00`, `$01`: App references within the spell (can be any unique identifier)
-- tag: **`n`** — the app represents an NFT, **`t`** — the app represents a fungible token
-- **`<app_id>`**: hex-encoded 32-byte app identity (the same for related NFTs/tokens)
-- **`<app_vk>`**: hex-encoded 32-byte app verification key
-
-There can be multiple apps in the same spell. Apps only different in the tag (e.g. `n` vs `t`) are considered different apps. Such apps can be related (and most likely are), for example, an NFT can manage issuance of a fungible token and carry token metadata (name, ticker symbol, description, logo, website URL, etc.) as recommended in [CHIP-420](https://github.com/CharmsDev/charms/blob/main/CHIPs/CHIP-0420). 
-
-### `public_inputs`
-
-Public inputs for proving the transaction against app contracts. This section is **optional**. It is not needed for simple transfers.
+Normalized transaction payload.
 
 ```json
-"public_inputs": {
-  "$00": <public input data for app $00>,
-  "$0N": <public input data for app $0N>
-}
-```
-
-- `$00`, `$0N`: App references (same as in the `apps` section). Any app from the `apps` section can have an entry here, but it is not required.
-- **`<public input data>`**: Public input data required for the app's proof generation. This data **is** recorded on-chain.
-
-### `private_inputs`
-
-Private inputs for proving the transaction against app contracts. This section is **optional**. It is not needed for simple transfers.
-
-```json
-"private_inputs": {
-  "$00": <private input data for app $00>,
-  "$0N": <private input data for app $0N>
-}
-```
-
-- `$00`, `$0N`: App references (same as in the `apps` section). Any app from the `apps` section can have an entry here, but it is not required.
-- **`<private input data>`**: Private input data required for the app's proof generation. This data **is not** recorded on-chain.
-
-### `ins`
-
-Input UTXOs of the transaction. This section is **required** (can be an empty list — for transactions not spending any outputs with charms).
-
-```json
-"ins": [
-  {
-    "utxo_id": "<txid>:<vout>",
-    "charms": {
-      "$00": <charm data>,
-      "$0m": <charm data>
-    }
-  },
-  {
-    "utxo_id": "<source_txid>:<vout>",
-    "charms": {
-      "$00": <charm data>,
-      "$0n": <charm data>
-    }
-  }
-]
-```
-
-- **`utxo_id`**: Transaction ID and output index (txid:vout) of a UTXO being spent
-- **`charms`**: Charms in the specified UTXO
-  - $00, $0m, $0n: App references (same as in the `apps` section). Any app from the `apps` section can have charms in source UTXOs.
-  - **`<charm data>`**: Depending on the app, this can be a single unsigned integer value (for fungible tokens) or a complex object (for NFTs). For example:
-    - For fungible tokens: `<charm data>` is the amount of the token in the UTXO
-    - For NFTs: `<charm data>` is an object containing metadata properties of the NFT
-
-### `outs`
-
-Transaction outputs. This section is **required** (can be an empty list — for transactions not creating any outputs with charms).
-
-```json
-"outs": [
-  {
-    "address": "<destination_address>",
-    "charms": {
-      "$00": <charm data>,
-      "$0m": <charm data>
+"tx": {
+  "ins": [
+    "<txid_1>:<vout_1>",
+    "<txid_2>:<vout_2>"
+  ],
+  "refs": [
+    "<ref_txid>:<ref_vout>"
+  ],
+  "outs": [
+    {
+      "0": {
+        "ticker": "TOAD",
+        "remaining": 30160
+      },
+      "1": 42
     },
-    "sats": 1000
+    {
+      "2": 69420
+    }
+  ],
+  "beamed_outs": {
+    "1": "009fb48961bca8ec68f01ec882f7ec0dc7dc5cc6bcf4ad154f129ea2338f6cd1"
   },
-  {
-    "address": "<destination_address>",
-    "charms": {
-      "$00": <charm data>,
-      "$0n": <charm data>
-    },
-    "sats": 1000
-  }
-]
+  "coins": [
+    {
+      "amount": 1000,
+      "dest": "2f7e10b8f6e2089b5bb5dcce96e8dd49ca01012f6506af0fe7bf5d2f2f5db531"
+    }
+  ]
+}
 ```
 
-- **`address`**: Recipient's Bitcoin address
-- **`charms`**: Charms in the specified UTXO
-  - $00, $0m, $0n: App references (same as in the `apps` section). Any app from the `apps` section can have charms in source UTXOs.
-  - **`<charm data>`**: Depending on the app, this can be a single unsigned integer value (for fungible tokens) or a complex object (for NFTs). For example:
-    - For fungible tokens: `<charm data>` is the amount of the token in the UTXO, e.g. `42` or `69000`
-    - For NFTs: `<charm data>` is an object containing metadata properties of the NFT — see [CHIP-420](https://github.com/CharmsDev/charms/tree/main/CHIPs/CHIP-0420)
-- **`sats`**: Amount of satoshis to include in the output (optional, defaults to 1000, can be as low as the current dust limit)
+- **`ins`**: Input UTXOs spent by the transaction (`txid:vout`). Optional in serialized spells.
+- **`refs`**: Optional reference UTXOs.
+- **`outs`**: Output charms. Each output is a map of **app index** to charm data.
+- **`beamed_outs`**: Optional map of output index to destination UTXO hash for beaming.
+- **`coins`**: Optional native coin outputs (`amount` and hex-encoded `dest`).
+
+Use `charms util dest` to derive output `dest` from an address when constructing `coins` entries.
+
+### `app_public_inputs`
+
+Maps each app in the spell to that app's public input data.
+
+```json
+"app_public_inputs": {
+  "n/<app_id>/<app_vk>": {
+    "ticker": "TOAD",
+    "remaining": 30580
+  },
+  "t/<app_id>/<app_vk>": null,
+  "c/0000000000000000000000000000000000000000000000000000000000000000/<app_vk>": {
+    "param": "value"
+  }
+}
+```
+
+- App keys are in `tag/identity/vk` format:
+  - `n/...` for NFT apps
+  - `t/...` for fungible token apps
+  - `c/...` for contract apps
+- Public input values can be `null` for simple transfers.
+
+App indexes used in `tx.outs` (`0`, `1`, `2`, ...) refer to this map in sorted key order.
+
+### `mock`
+
+```json
+"mock": false
+```
+
+Optional. Use `true` only for mock-mode workflows.
+
+## About Private Inputs
+
+Private app inputs are **not part of Spell JSON** in v11.0.1. Pass them separately to proving/checking interfaces:
+
+```sh
+charms spell prove --private-inputs=./private-inputs.yaml ...
+```
+
+- For API requests, use `app_private_inputs` in the prover payload.
 
 ## Implementation Tips
 
-- Retrieve the UTXO information from your wallet's UTXO set
-- Validate all values before constructing the final JSON
-- Use proper JSON serialization to avoid formatting issues
+- Keep `version` at `11`.
+- Ensure all app indexes in `tx.outs` are valid indexes into `app_public_inputs`.
+- Include all prerequisite transactions in `prev_txs` when checking/proving.
+- Validate spell shape with `charms spell check` before proving.
