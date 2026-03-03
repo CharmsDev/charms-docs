@@ -28,20 +28,16 @@ Double-spending is prevented by Bitcoin.
 
 *Spells* create and transform _charms_ via Bitcoin transactions.
 
-A spell is included in a transaction witness spending a [Taproot](https://lightning.engineering/posts/2023-04-19-taproot-musig2-recap/) output. It is included in an *envelope* — a sequence of opcodes `OP_FALSE` `OP_IF` ... (push data) ... `OP_ENDIF`, which is effectively a no-op: since the condition is `false`, no data is pushed onto the stack.
+A spell is stored in an `OP_RETURN` output of the transaction:
 
 ```
-OP_FALSE
-OP_IF
+OP_RETURN
   OP_PUSH "spell"
-  OP_PUSH $spell_data
-  OP_PUSH $proof_data
-OP_ENDIF
+  OP_PUSH $spell_and_proof
 ```
-where: 
-- `OP_PUSH "spell"` shows that the envelope contains a *spell*.
-- `OP_PUSH $spell_data` — CBOR-encoded `NormalizedSpell` (see [v11.0.1 source](https://github.com/CharmsDev/charms/blob/v11.0.1/charms-client/src/lib.rs)).
-- `OP_PUSH $proof_data` — Groth16 proof attesting to verification of correctness of the spell.
+where:
+- `OP_PUSH "spell"` is a marker identifying the output as a Charms spell.
+- `OP_PUSH $spell_and_proof` — CBOR-encoded `(NormalizedSpell, Proof)` tuple (see [v11.0.1 source](https://github.com/CharmsDev/charms/blob/v11.0.1/charms-client/src/lib.rs)). The proof is a Groth16 proof attesting to the correctness of the spell.
 
 
 ## Logical Structure of a Spell

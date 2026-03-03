@@ -20,23 +20,18 @@ There are two types of _simple transfers_ in Charms, corresponding to the two sp
 
 2. **Fungible Token** transfers: For (fungible) token apps involved in the transaction, the transaction is a simple transfer with regard to the app (the asset defined by the app), if and only if the total amount of the token in all outputs equals the total amount of the token in the inputs.
 
-## The Two-Transaction Model
+## Spell Transactions
 
-Charms cast spells on transactions using a two-transaction model (similar to [Ordinals](https://docs.ordinals.com/inscriptions.html)):
-
-1. **Commit Transaction**: Sets up the transfer by committing to the spell to be inscribed, creating the Taproot output spendable (with a script path) by the spell transaction.
-2. **Spell Transaction**: Reveals the spell (and its proof), spending the Taproot output by presenting the script with the spell data in the witness.
-
-Both transactions are submitted to the Bitcoin network as a package, ensuring that the spell is inscribed correctly and securely.
+A spell is embedded in a single Bitcoin transaction as an `OP_RETURN` output containing the spell data and its zero-knowledge proof. The Prover API generates this transaction from a spell definition.
 
 ## The Transfer Process
 
 The complete transfer process involves several key steps:
 
 1. **Prepare the Spell JSON**: Specify the charms and transfer details
-2. **Call the Prover API**: Generate the required transactions
-3. **Sign the Transactions**: Sign both the commit and spell transactions
-4. **Broadcast the Transactions**: Send the transactions to the Bitcoin network as a **package**
+2. **Call the Prover API**: Generate the spell transaction
+3. **Sign the Transaction**: Sign the spell transaction
+4. **Broadcast the Transaction**: Send the transaction to the Bitcoin network
 
 ## Next Steps
 

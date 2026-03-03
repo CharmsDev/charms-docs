@@ -4,7 +4,7 @@ sidebar:
   order: 5
 ---
 
-The Prover API generates the required transactions (commit + spell) for Charms operations. You can use the hosted service or run your own prover server.
+The Prover API generates the spell transaction for Charms operations. You can use the hosted service or run your own prover server.
 
 ## API Endpoint
 
@@ -126,22 +126,22 @@ const response = await fetch(proveApiUrl, {
   body: JSON.stringify(requestBody)
 });
 
-// Response contains commit_tx and spell_tx
+// Response contains the spell transaction
 const result = await response.json();
-const commitTx = result[0];
-const spellTx = result[1];
+const spellTx = result[0];
 ```
 
 ## Response Format
 
-The API response is a JSON array of chain-tagged transactions.
+The API response is a JSON array containing the chain-tagged spell transaction.
 
 ```json
 [
-  { "bitcoin": "hex_encoded_commit_tx" },
   { "bitcoin": "hex_encoded_spell_tx" }
 ]
 ```
+
+The transaction includes the spell and its proof in an `OP_RETURN` output.
 
 For Cardano, entries are tagged as `{ "cardano": ... }`.
 
@@ -160,4 +160,4 @@ Implement proper error handling to catch and process these errors in your applic
 - Ensure the funding UTXO has sufficient value to cover the transaction fees
 - Use appropriate fee rates based on network conditions
 - Implement retry logic for temporary server errors (HTTP 500)
-- Store both transactions securely until they are signed and broadcast
+- Store the transaction securely until it is signed and broadcast
