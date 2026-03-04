@@ -5,13 +5,13 @@ sidebar:
   order: 2
 ---
 
-Spells are the magic that creates *charms*.
+Spells are the magic that creates charms.
 
-The idea is to add *charms*-related metadata (*spells*) to Bitcoin transactions (similar to Runes' *runestones*).
+Specifically, a spell is the charm-related metadata added to Bitcoin transactions (similar to Runes' *runestones*).
 
-*Spells* are **client-side validated**, meaning that **the users** choose to interpret or ignore them. If they choose to interpret them, they can use `charms` — similar to Ordinals and Runes interpreted by `ord`.
+Spells are **client-side validated**, meaning that **the users** choose to interpret or ignore them. If they choose to interpret them, they can use `charms` — similar to Ordinals and Runes interpreted by `ord`.
 
-A *spell* is said to be *correct* if and only if all of these are true:
+A spell is said to be correct if and only if all of these are true:
 - it is successfully parsed and interpreted
 - makes sense for the transaction (e.g., doesn't produce more Charms outputs than there are Bitcoin outputs)
 - has a valid proof
@@ -80,5 +80,5 @@ In this example we have:
 
 - `tx.outs` — a list of outputs (strings of charms) created by this spell. In each output, keys are app indexes (`0`, `1`, `2`, ...) pointing to apps in `app_public_inputs`, and values are charm data for those apps.
 
-- `tx.coins` — native coin outputs (Bitcoin sats or Cardano lovelace) for the resulting transaction outputs.
+- `tx.coins` — native coin outputs (Bitcoin sats, Cardano lovelace, etc) for the resulting transaction outputs.
 
