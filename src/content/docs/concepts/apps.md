@@ -13,8 +13,7 @@ Here's the code structure of such app contract (in Rust):
 
 ```rust
 use charms_sdk::data::{
-    check, nft_state_preserved, sum_token_amount, token_amounts_balanced, App, Data, Transaction,
-    NFT, TOKEN,
+    charm_values, check, sum_token_amount, App, Data, Transaction, NFT, TOKEN,
 };
 
 /// The entry point of the app. This function defines the app contract
@@ -22,32 +21,32 @@ use charms_sdk::data::{
 pub fn app_contract(app: &App, tx: &Transaction, x: &Data, w: &Data) -> bool {
     match app.tag {
         NFT => {
-            check!(nft_contract_satisfied(app, tx, x, w))
+            check!(nft_contract_satisfied(app, tx, w))
         }
         TOKEN => {
-            check!(token_contract_satisfied(app, tx, x, w))
+            check!(token_contract_satisfied(app, tx))
         }
         _ => unreachable!(),
     }
     true
 }
 
-fn nft_contract_satisfied(app: &App, tx: &Transaction, x: &Data, w: &Data) -> bool {
+fn nft_contract_satisfied(app: &App, tx: &Transaction, w: &Data) -> bool {
     let token_app = &App {
         tag: TOKEN,
-        id: app.id.clone(),
-        vk_hash: app.vk_hash.clone(),
+        identity: app.identity.clone(),
+        vk: app.vk.clone(),
     };
-    check!(nft_state_preserved(app, tx) || can_mint_nft(app, tx, x, w) || can_mint_token(&token_app, tx, x, w));
+    check!(can_mint_nft(app, tx, w) || can_mint_token(&token_app, tx));
     true
 }
 
-fn token_contract_satisfied(app: &App, tx: &Transaction, x: &Data, w: &Data) -> bool {
-    check!(amounts_balanced(app, tx) || can_mint_token(app, tx, x, w));
+fn token_contract_satisfied(token_app: &App, tx: &Transaction) -> bool {
+    check!(can_mint_token(token_app, tx));
     true
 }
 
-// ... `can_mint_nft` and `can_mint_token` implementations ... 
+// ... `can_mint_nft` and `can_mint_token` implementations ...
 ```
 
 Get a full working example by running:

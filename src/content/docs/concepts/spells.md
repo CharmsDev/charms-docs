@@ -28,20 +28,16 @@ Double-spending is prevented by Bitcoin.
 
 *Spells* create and transform _charms_ via Bitcoin transactions.
 
-A spell is included in a transaction witness spending a [Taproot](https://lightning.engineering/posts/2023-04-19-taproot-musig2-recap/) output. It is included in an *envelope* — a sequence of opcodes `OP_FALSE` `OP_IF` ... (push data) ... `OP_ENDIF`, which is effectively a no-op: since the condition is `false`, no data is pushed onto the stack.
+A spell is stored in an `OP_RETURN` output of the transaction:
 
 ```
-OP_FALSE
-OP_IF
+OP_RETURN
   OP_PUSH "spell"
-  OP_PUSH $spell_data
-  OP_PUSH $proof_data
-OP_ENDIF
+  OP_PUSH $spell_and_proof
 ```
-where: 
-- `OP_PUSH "spell"` shows that the envelope contains a *spell*.
-- `OP_PUSH $spell_data` — CBOR-encoded [`NormalizedSpell`](https://docs.rs/charms/0.4.1/charms/spell/struct.NormalizedSpell.html).
-- `OP_PUSH $proof_data` — Groth16 proof attesting to verification of correctness of the spell.
+where:
+- `OP_PUSH "spell"` is a marker identifying the output as a Charms spell.
+- `OP_PUSH $spell_and_proof` — CBOR-encoded `(NormalizedSpell, Proof)` tuple (see [v11.0.1 source](https://github.com/CharmsDev/charms/blob/v11.0.1/charms-client/src/lib.rs)). The proof is a Groth16 proof attesting to the correctness of the spell.
 
 
 ## Logical Structure of a Spell
@@ -49,47 +45,40 @@ where:
 Here is an example of a spell that sends an NFT and some fungible tokens, and also mints some tokens:
 
 ```yaml
-version: 8
-
-apps:
-  $0000: n/f54f6d40bd4ba808b188963ae5d72769ad5212dd1d29517ecc4063dd9f033faa/7df792057addc74f1a6ca23da5b8b82475a7c31c3a4d45266c16a604c62eba4c
-  $0001: t/7e7e5623a8b44556021171f533a3404b009e7c66edd5a47362c8e54c54a6e058/b25ddd68cd441a2bb0f7113abaaef74983c4e01fc66c7465e1f18363fc80454d
-  $0002: t/f54f6d40bd4ba808b188963ae5d72769ad5212dd1d29517ecc4063dd9f033faa/7df792057addc74f1a6ca23da5b8b82475a7c31c3a4d45266c16a604c62eba4c
-
-ins:
-  - utxo_id: 33027a870a0f8c7b3d3114d970b6e67d11b32316ad5b6c58bdc7e0d8e77f7e6a:1
-    charms:
-      $0001: 42
-      $0002: 69000
-
-  - utxo_id:  92077a14998b31367efeec5203a00f1080facdb270cbf055f09b66ae0a273c7d:0
-    charms:
-      $0000: 
-        ticker: TOAD
-        remaining: 30580
-
-outs:
-  - address: tb1p2lgmc56q8vu4run2p8u3a4mzp8h7e7qgu0243rlgchzqqe8zt0as2vld7e
-    charms:
-      $0000:
+version: 11
+tx:
+  ins:
+    - 33027a870a0f8c7b3d3114d970b6e67d11b32316ad5b6c58bdc7e0d8e77f7e6a:1
+    - 92077a14998b31367efeec5203a00f1080facdb270cbf055f09b66ae0a273c7d:0
+  outs:
+    - 0:
         ticker: TOAD
         remaining: 30160
-      $0001: 42
-
-  - address: tb1pxpjgtv30gl0nvce5ujzqgc0802gy9vtta4ens9mzpucymlg5fgfsprzrlc
-    charms:
-      $0002: 69420
+      1: 42
+    - 2: 69420
+  coins:
+    - amount: 1000
+      dest: 2f7e10b8f6e2089b5bb5dcce96e8dd49ca01012f6506af0fe7bf5d2f2f5db531
+    - amount: 1000
+      dest: 009fb48961bca8ec68f01ec882f7ec0dc7dc5cc6bcf4ad154f129ea2338f6cd1
+app_public_inputs:
+  n/f54f6d40bd4ba808b188963ae5d72769ad5212dd1d29517ecc4063dd9f033faa/7df792057addc74f1a6ca23da5b8b82475a7c31c3a4d45266c16a604c62eba4c:
+  t/7e7e5623a8b44556021171f533a3404b009e7c66edd5a47362c8e54c54a6e058/b25ddd68cd441a2bb0f7113abaaef74983c4e01fc66c7465e1f18363fc80454d:
+  t/f54f6d40bd4ba808b188963ae5d72769ad5212dd1d29517ecc4063dd9f033faa/7df792057addc74f1a6ca23da5b8b82475a7c31c3a4d45266c16a604c62eba4c:
 ```
 
 In this example we have:
 
-- `apps` — a list of apps involved in the spell. App is a tuple of `tag/identity/VK` (see [`App`](https://docs.rs/charms-data/0.4.1/charms_data/struct.App.html)) where:
+- `app_public_inputs` — a map of all apps involved in the spell. App is a tuple of `tag/identity/VK` where:
   - `tag` is a single character representing the app type (`n` for NFTs, `t` for fungible tokens).
     `tag` can be anything, but `n` and `t` have special meaning (simple transfers of NFTs and tokens don't need app contract proofs, so the recursive spell proof can be generated faster).
   - `identity` is a 32-byte array identifying the asset within this app.
   - `VK` is the verification key hash of the app [implementing the logic](/concepts/apps) of the asset: how it can be minted or burned, staked or used.
+  - each app value is that app's public input data (may be empty for simple transfers).
 
-- `ins` — a list of input UTXOs to be spent by the transaction. 
+- `tx.ins` — a list of input UTXOs (`txid:vout`) to be spent by the transaction.
 
-- `outs` — a list of outputs (strings of charms) created by this spell.
+- `tx.outs` — a list of outputs (strings of charms) created by this spell. In each output, keys are app indexes (`0`, `1`, `2`, ...) pointing to apps in `app_public_inputs`, and values are charm data for those apps.
+
+- `tx.coins` — native coin outputs (Bitcoin sats or Cardano lovelace) for the resulting transaction outputs.
 

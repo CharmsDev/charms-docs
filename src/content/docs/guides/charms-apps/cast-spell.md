@@ -26,41 +26,37 @@ Prepare:
 app_bin=$(charms app build)
 
 # pick from the output of `bitcoin-cli listunspent`
-# should NOT be the same as the one you used for minting the NFT
-funding_utxo="2d6d1603f0738085f2035d496baf2b91a639d204b414ea180beb417a3e09f84e:1"
-funding_utxo_value="50000" # in sats
 change_address=$(b getrawchangeaddress)
+
+# set dest and amount env vars used by the spell template
+# (dest is a hex-encoded destination derived from a Bitcoin address)
+export dest_0=$(charms util dest --addr=$(b getnewaddress))
+export amount_0=1000
 
 export RUST_LOG=info
 ```
 
 Run:
 ```sh
-cat ./spells/mint-nft.yaml | envsubst | charms spell prove --app-bins=${app_bin} --prev-txs=$prev_txs --funding-utxo=$funding_utxo --funding-utxo-value=$funding_utxo_value --change-address=$change_address
+cat ./spells/mint-nft.yaml | envsubst | charms spell prove \
+  --app-bins=${app_bin} \
+  --prev-txs=$prev_txs \
+  --private-inputs=<(cat ./spells/mint-nft-private.yaml | envsubst) \
+  --change-address=$change_address
 ```
 
-This will create (but not yet sign) two Bitcoin transactions:
+This will create (but not yet sign) a Bitcoin transaction containing the spell and its proof in an `OP_RETURN` output.
 
-- _commit_ transaction and
-- _spell_ transaction.
-
-The _commit_ transaction creates exactly one output (committing to a spell and its proof) which is then spent by the
-_spell_ transaction. The _spell_ transaction contains the spell and proof (in the witness spending the
-output created by the _commit_ tx), and it cannot exist without the _commit_ transaction.
-
-:::note
-Currently, `charms spell prove` takes a pretty long time (about 5 minutes). We're working on improving this.
-:::
-
-`charms spell prove` prints the 2 hex-encoded signed transactions at the end of its output, which looks like a JSON
+`charms spell prove` prints the hex-encoded transaction at the end of its output, which looks like a JSON
 array (because it is a JSON array):
 
 ```
-[{"bitcoin":"020000000001015f...57505efa00000000"},{"bitcoin":"020000000001025f...e14c656300000000"}]
+[{"bitcoin":"020000000001015f...57505efa00000000"}]
 ```
 
-You can now sign these transactions. Then submit both to the Bitcoin network as a package:
+You can now sign and broadcast the transaction:
 
 ```sh
-b submitpackage '["020000000001015f...57505efa00000000", "020000000001025f...e14c656300000000"]'
+b signrawtransactionwithwallet "020000000001015f...57505efa00000000"
+b sendrawtransaction "020000000001015f...57505efa00000000"
 ```
