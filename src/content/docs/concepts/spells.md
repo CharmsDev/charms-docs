@@ -5,11 +5,9 @@ sidebar:
   order: 2
 ---
 
-Spells are the magic that creates *charms*.
+Every Charms transaction contains a **spell**: Charms-related metadata added to the blockchain transaction (similar to Runes' *runestones*).
 
-The idea is to add *charms*-related metadata (*spells*) to Bitcoin transactions (similar to Runes' *runestones*).
-
-*Spells* are **client-side validated**, meaning that **the users** choose to interpret or ignore them. If they choose to interpret them, they can use `charms` — similar to Ordinals and Runes interpreted by `ord`.
+Spells are **client-side validated**, meaning that **the users** choose to interpret or ignore them. If they choose to interpret them, they can use `charms` — similar to Ordinals and Runes interpreted by `ord`.
 
 A *spell* is said to be *correct* if and only if all of these are true:
 - it is successfully parsed and interpreted
