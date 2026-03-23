@@ -7,7 +7,7 @@ sidebar:
 Let's get started with Charms! This guide will walk you through building your Charms app in a few minutes.
 
 :::note
-Make sure you have [Rust](https://rust-lang.org/) and [protobuf](https://protobuf.dev/) installed
+Make sure you have [Rust](https://rust-lang.org/) and the Protocol Buffers compiler [`protoc`](https://protobuf.dev/downloads/) installed.
 :::
 
 Install Charms CLI:
