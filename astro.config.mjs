@@ -42,7 +42,7 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Concepts',
-					autogenerate: { directory: 'concepts' },
+					items: [{ autogenerate: { directory: 'concepts' } }],
 				},
 				{
 					label: 'Guides',
@@ -50,7 +50,7 @@ export default defineConfig({
 						{
 							label: 'Charms Apps',
 							collapsed: false,
-							autogenerate: { directory: 'guides/charms-apps' },
+							items: [{ autogenerate: { directory: 'guides/charms-apps' } }],
 						},
 						{
 							label: 'Wallet Integration',
