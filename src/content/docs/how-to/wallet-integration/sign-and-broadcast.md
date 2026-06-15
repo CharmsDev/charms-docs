@@ -32,9 +32,10 @@ bitcoin-cli sendrawtransaction <signed_spell_tx_hex>
 
 ## Considerations
 
-- **Fee rate.** The fee is set when you prove (the Prover API `fee_rate`, default
-  `2.0` sats/vB). Choose a rate appropriate to network conditions so the
-  transaction is accepted into the mempool and confirmed.
+- **Fee rate.** The fee is set when you prove (`fee_rate` in the Prover API
+  request, or `--fee-rate` on the CLI — default `2.0` sats/vB). Choose a rate
+  appropriate to network conditions so the transaction is accepted into the
+  mempool and confirmed.
 - **Validate before sending.** Confirm the transaction is well-formed and the
   inputs are still unspent before broadcasting.
 - **One transaction.** There is no commit/reveal step — signing and broadcasting

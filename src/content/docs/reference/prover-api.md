@@ -52,7 +52,7 @@ readability.)
 | `app_signatures` | map | (Optional) app `vk` (hex) → `{ public_key, signature }` for [versioned apps](/explanation/apps#immutable-and-versioned-apps). Omit when empty. |
 | `prev_txs` | array | Prerequisite transactions, chain-tagged: `{"bitcoin":"<hex>"}` / `{"cardano":"<hex>"}` (and finality-proof forms for beaming). |
 | `change_address` | string | **Required.** Change address for the target chain. |
-| `fee_rate` | number | Bitcoin fee rate (sats/vB). |
+| `fee_rate` | number | Bitcoin fee rate (sats/vB). Defaults to `0.0` if omitted (the CLI defaults to `2.0`). |
 | `chain` | string | `bitcoin` or `cardano`. |
 | `collateral_utxo` | string | (Optional) `txid:vout` collateral. **Required for Cardano.** |
 

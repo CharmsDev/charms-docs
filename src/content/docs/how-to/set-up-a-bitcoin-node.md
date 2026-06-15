@@ -8,7 +8,10 @@ To cast spells on Bitcoin you need a Bitcoin Core node. This guide sets one up o
 
 ## Bitcoin Core
 
-Bitcoin Core **v30 or later** is required. Install it with Homebrew:
+Bitcoin Core **v28.0 or later** is required (`testnet4` was added in v28.0). A
+recent release is recommended — spell transactions carry a larger `OP_RETURN` than
+the historical 80-byte standardness limit, and current Bitcoin Core versions
+relay them. Install with Homebrew:
 
 ```sh
 brew install bitcoin

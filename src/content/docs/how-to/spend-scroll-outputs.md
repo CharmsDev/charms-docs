@@ -54,9 +54,10 @@ programmable custody enforced by Charms logic.
 
 ## Calling without dfx
 
-You can call the canister with any Internet Computer agent
-(`ic-agent`/agent-rs), or over HTTP via the `scrolls-api` service, which exposes
-`POST /{network}/sign` and returns `{ txid, wtxid }` as JSON.
+Call the v15 canister with any Internet Computer agent (`ic-agent`/agent-rs).
+The `scrolls-api` HTTP wrapper (`POST /{network}/sign`) targets the older **v14**
+canister and its nonce-based addresses — use it only for legacy v14 Scroll UTXOs,
+not for v15.
 
 See the [Scrolls canister reference](/reference/scrolls-canister) for the full
 method signatures and the `SignRequest` shape.

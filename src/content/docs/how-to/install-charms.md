@@ -9,8 +9,9 @@ This guide installs the `charms` command-line tool. To run your own prover, see
 
 ## Prerequisites
 
-- **[Rust](https://rust-lang.org/)** (stable toolchain, via
-  [rustup](https://rustup.rs/)).
+- **[Rust](https://rust-lang.org/)** 1.94 or later (stable toolchain, via
+  [rustup](https://rustup.rs/)). Charms v15 and its app template use Rust edition
+  2024.
 - The **Protocol Buffers compiler `protoc`** —
   [`protobuf`](https://protobuf.dev/downloads/):
 

@@ -48,13 +48,14 @@ address:
 ```sh
 export dest_0=$(charms util dest --addr $(b getnewaddress))
 export amount_0=20000                       # sats carried by the NFT output
-change_address=$(b getrawchangeaddress)
+export change_address=$(b getrawchangeaddress)
 ```
 
 ## 3. Prove the spell
 
 Proving runs the app contract and generates the zero-knowledge proof. By default
-the CLI sends the request to the hosted prover at `https://v15.charms.dev` — this
+the CLI sends the request to the hosted prover at
+`https://v15.charms.dev/spells/prove` — this
 takes a little while.
 
 ```sh

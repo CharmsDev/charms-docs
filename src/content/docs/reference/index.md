@@ -17,8 +17,8 @@ section to look things up; for guided learning see the
   and macros used to write app contracts.
 - **[Prover API](/reference/prover-api)** — the `POST /spells/prove` HTTP
   endpoint: request and response.
-- **[Scrolls canister](/reference/scrolls-canister)** — the `scrolls_bitcoin_v15`
-  Internet Computer canister API.
+- **[Scrolls canisters](/reference/scrolls-canister)** — the
+  `scrolls_bitcoin_v15` and `scrolls_cardano` Internet Computer canister APIs.
 
 :::note[Version]
 This documentation describes **Charms v15** (protocol version `15`). The current

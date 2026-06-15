@@ -116,7 +116,7 @@ export default defineConfig({
 						{ label: 'Spell structure', link: '/reference/spell' },
 						{ label: 'SDK', link: '/reference/sdk' },
 						{ label: 'Prover API', link: '/reference/prover-api' },
-						{ label: 'Scrolls canister', link: '/reference/scrolls-canister' },
+						{ label: 'Scrolls canisters', link: '/reference/scrolls-canister' },
 					],
 				},
 				{

@@ -1,9 +1,11 @@
 ---
-title: Scrolls canister
-description: "The scrolls_bitcoin_v15 Internet Computer canister API."
+title: Scrolls canisters
+description: "The scrolls_bitcoin_v15 and scrolls_cardano Internet Computer canister APIs."
 sidebar:
   order: 5
 ---
+
+## `scrolls_bitcoin_v15`
 
 The `scrolls_bitcoin_v15` canister is the Bitcoin signer for Charms v15. It
 derives the addresses that [Scroll](/explanation/scrolls) outputs are locked to,
@@ -110,7 +112,7 @@ it yourself.
 The signature lets the spell proof verify, in-circuit, that these are genuinely
 the canister's addresses for the given transaction. This is how a Scroll output
 is provably pinned to programmable custody — see
-[`fill_scroll_outputs`](/explanation/scrolls#scroll-charms).
+[Scroll charms](/explanation/scrolls#scroll-charms).
 
 ## Other methods
 
@@ -122,16 +124,63 @@ is provably pinned to programmable custody — see
 | `cycles_balance()` | (query) The canister's cycles balance. |
 | `deposit_cycles()` | Top up the canister's cycles (it is designed to be blackholed). |
 
-## Calling the canister
+## Calling the Bitcoin canister
 
 - **`ic-agent` / agent-rs (Rust)** — what the prover uses: build an `Agent`
   against `https://ic0.app`, `Encode!` the args, and `update`/`query` the
   canister, decoding the reply with `Decode!`.
 - **`dfx`** — `dfx canister --network ic call rpgc6-oqaaa-aaaak-qy3uq-cai <method> '(<candid>)'`.
-- **HTTP** — a Cloudflare Worker (`scrolls-api`) wraps the canister and exposes
-  `POST /{network}/sign`, returning `{ txid, wtxid }` as JSON.
+
+:::note[scrolls-api HTTP wrapper]
+The Cloudflare Worker (`scrolls-api`) exposes `POST /{network}/sign` over HTTP,
+but it wraps the older **v14** canister (`lmbwh-3qaaa-aaaak-qunha-cai`) and its
+nonce-based address model. For v15 Scroll outputs, call the v15 canister
+directly (as above) or let the prover fill addresses via `addresses`.
+:::
 
 There is no per-caller access control: the canister signs for anyone, but only a
 transaction that carries a valid spell and pays the fee. Address-derivation
 integrity is protected by a canister-private secret prefix and the signed
 `addresses` attestation.
+
+## `scrolls_cardano`
+
+The `scrolls_cardano` canister co-signs Cardano spell transactions and issues
+finality attestations used when [beaming](/explanation/beaming) out of Cardano.
+
+| | |
+| --- | --- |
+| Canister (IC mainnet) | `tty7k-waaaa-aaaak-qvngq-cai` |
+| Networks | `"mainnet"`, `"preprod"` |
+
+The Charms prover calls `sign` automatically while proving Cardano spells. Wallets
+and integrators rarely call this canister directly.
+
+### Candid interface
+
+```candid
+type Config = record {
+  fee_address : vec record { text; text };
+  fixed_cost : nat64;
+};
+
+service : () -> {
+  sign            : (text) -> (variant { Ok : text; Err : text });  // tx hex in/out
+  certify_final   : (text) -> (variant { Ok : text; Err : text });
+  finality_vkey   : () -> (variant { Ok : text; Err : text });
+  vkey            : () -> (variant { Ok : text; Err : text });
+  config          : () -> (Config) query;
+  cycles_balance  : () -> (nat) query;
+  deposit_cycles  : () -> (variant { Ok : nat; Err : text });
+}
+```
+
+| Method | Description |
+| --- | --- |
+| `sign(tx_to_sign)` | Co-sign a Cardano spell transaction (hex in, signed hex out). Called by the prover. |
+| `certify_final(tx)` | Produce a finality-certified transaction. |
+| `finality_vkey()` | Return the Ed25519 public key used for finality attestations (beaming). |
+| `vkey()` | Return the canister's signing verification key. |
+| `config()` | (query) Fee address and fixed cost. |
+| `cycles_balance()` | (query) Cycles balance. |
+| `deposit_cycles()` | Top up cycles (canister is designed to be blackholed). |
