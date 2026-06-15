@@ -8,7 +8,7 @@ To cast spells on Bitcoin you need a Bitcoin Core node. This guide sets one up o
 
 ## Bitcoin Core
 
-Bitcoin Core **v28.0 or later** is required. Install it with Homebrew:
+Bitcoin Core **v30 or later** is required. Install it with Homebrew:
 
 ```sh
 brew install bitcoin
