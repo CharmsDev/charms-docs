@@ -62,9 +62,10 @@ export NETWORK_PRIVATE_KEY=0x…       # your Succinct Prover Network private ke
 charms-prover server
 ```
 
-`NETWORK_PRIVATE_KEY` is **required** when a backend is `network` — the server
-will fail to start without it. This is the key for your Succinct account, which
-pays for proof requests.
+`NETWORK_PRIVATE_KEY` is **required** for network proving: the SP1 SDK looks it
+up when it builds the network prover, which happens on the **first proof
+request**. The server process starts without it, but the first prove will fail.
+It is the key for your Succinct account, which pays for proof requests.
 
 ### Prove locally on CPU (no network)
 
