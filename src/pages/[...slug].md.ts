@@ -21,6 +21,16 @@ function resolveDocsFile(id: string): string {
 	throw new Error(`No source file found for docs entry: ${id}`);
 }
 
+function stripTrailingSlashesFromInternalLinks(md: string): string {
+	// Remove trailing / from internal docs links in Markdown syntax,
+	// e.g. [text](/guides/foo/) → [text](/guides/foo)
+	// Also handles fragments: [text](/guides/foo/#bar) and query strings.
+	return md.replace(
+		/(\]\()((?:\/[^)\s#?]+?))\/(?=[?#)]|$)/g,
+		'$1$2'
+	);
+}
+
 export const GET: APIRoute = ({ params }) => {
 	const { slug } = params;
 
@@ -31,8 +41,9 @@ export const GET: APIRoute = ({ params }) => {
 	try {
 		const filePath = resolveDocsFile(slug);
 		const content = readFileSync(filePath, 'utf-8');
+		const normalized = stripTrailingSlashesFromInternalLinks(content);
 
-		return new Response(content, {
+		return new Response(normalized, {
 			headers: {
 				'Content-Type': 'text/markdown; charset=utf-8',
 			},

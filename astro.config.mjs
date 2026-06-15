@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	trailingSlash: 'never',
 	integrations: [
 		starlight({
 			title: 'Charms',
@@ -58,11 +59,11 @@ export default defineConfig({
 							items: [
 								{
 									label: 'Introduction',
-									link: '/guides/wallet-integration/introduction/',
+									link: '/guides/wallet-integration/introduction',
 								},
 								{
 									label: 'Charms Visualization',
-									link: '/guides/wallet-integration/visualization/',
+									link: '/guides/wallet-integration/visualization',
 								},
 								{
 									label: 'Charms Transactions',
@@ -70,27 +71,27 @@ export default defineConfig({
 									items: [
 										{
 											label: 'Transactions Overview',
-											link: '/guides/wallet-integration/transactions/overview/',
+											link: '/guides/wallet-integration/transactions/overview',
 										},
 										{
 											label: 'NFT Transfers',
-											link: '/guides/wallet-integration/transactions/nft/',
+											link: '/guides/wallet-integration/transactions/nft',
 										},
 										{
 											label: 'Token Transfers',
-											link: '/guides/wallet-integration/transactions/token/',
+											link: '/guides/wallet-integration/transactions/token',
 										},
 										{
 											label: 'Prover API',
-											link: '/guides/wallet-integration/transactions/prover-api/',
+											link: '/guides/wallet-integration/transactions/prover-api',
 										},
 										{
 											label: 'Signing Transactions',
-											link: '/guides/wallet-integration/transactions/signing/',
+											link: '/guides/wallet-integration/transactions/signing',
 										},
 										{
 											label: 'Broadcasting Transactions',
-											link: '/guides/wallet-integration/transactions/broadcasting/',
+											link: '/guides/wallet-integration/transactions/broadcasting',
 										},
 									],
 								},
@@ -104,7 +105,7 @@ export default defineConfig({
 					items: [
 						{
 							label: 'Spell JSON Reference',
-							link: '/references/spell-json/',
+							link: '/references/spell-json',
 						},
 					],
 				},
