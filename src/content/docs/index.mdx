@@ -9,10 +9,10 @@ hero:
     file: ../../assets/charms.svg
   actions:
     - text: Get started
-      link: /guides/charms-apps/get-started
+      link: /tutorials/build-a-charms-app
       icon: rocket
-    - text: Why?
-      link: /concepts/why
+    - text: Why Charms?
+      link: /explanation/why-charms
       icon: right-arrow
       variant: minimal
     - text: Whitepaper
@@ -43,12 +43,35 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 	<Card title="Check your spells" icon="laptop">
         ```sh
-        ## edit the spell at ./spells/mint-tokens.yaml
-        ## then run
-        charms spell check --spell=./spells/mint-tokens.yaml
+        ## edit the spell at ./spells/mint-nft.yaml, then run
+        charms spell check --spell=./spells/mint-nft.yaml
         ```
 	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Charms Docs](./concepts/why).
+	<Card title="Cast a spell" icon="rocket">
+        Mint an NFT on Bitcoin in the
+        [Cast your first spell](/tutorials/cast-your-first-spell) tutorial.
+	</Card>
+</CardGrid>
+
+## Find your way around
+
+These docs follow the [Diátaxis](https://diataxis.fr) framework.
+
+<CardGrid>
+	<Card title="Tutorials" icon="open-book">
+		Learn by building, from install to a charm on Bitcoin.
+		[Start here →](/tutorials)
+	</Card>
+	<Card title="How-to guides" icon="setting">
+		Task-focused recipes: prove, beam, integrate a wallet, and more.
+		[Browse →](/how-to)
+	</Card>
+	<Card title="Explanation" icon="information">
+		Understand apps, spells, beaming, and Scrolls.
+		[Read →](/explanation)
+	</Card>
+	<Card title="Reference" icon="list-format">
+		The CLI, spell structure, SDK, Prover API, and Scrolls canister.
+		[Look up →](/reference)
 	</Card>
 </CardGrid>
