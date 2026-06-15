@@ -80,7 +80,7 @@ Re-broadcasting an already-confirmed transaction is idempotent (it succeeds
 rather than erroring).
 
 ```sh
-dfx canister --network ic call rpgc6-oqaaa-aaaak-qy3uq-cai sign_and_submit \
+icp canister call --network ic rpgc6-oqaaa-aaaak-qy3uq-cai sign_and_submit \
   '("main", record {
       sign_inputs = vec { 0 : nat32 };
       prev_txs = vec { "0200000000…" };
@@ -129,7 +129,8 @@ is provably pinned to programmable custody — see
 - **`ic-agent` / agent-rs (Rust)** — what the prover uses: build an `Agent`
   against `https://ic0.app`, `Encode!` the args, and `update`/`query` the
   canister, decoding the reply with `Decode!`.
-- **`dfx`** — `dfx canister --network ic call rpgc6-oqaaa-aaaak-qy3uq-cai <method> '(<candid>)'`.
+- **`icp` CLI** — `icp canister call --network ic rpgc6-oqaaa-aaaak-qy3uq-cai <method> '(<candid>)'`.
+  Add `--query` for query methods (e.g. `config`, `cycles_balance`).
 
 :::note[scrolls-api HTTP wrapper]
 The Cloudflare Worker (`scrolls-api`) exposes `POST /{network}/sign` over HTTP,

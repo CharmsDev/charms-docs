@@ -36,7 +36,7 @@ programmable custody enforced by Charms logic.
    sign, the prerequisite transactions, and the partially-signed transaction:
 
    ```sh
-   dfx canister --network ic call rpgc6-oqaaa-aaaak-qy3uq-cai sign_and_submit \
+   icp canister call --network ic rpgc6-oqaaa-aaaak-qy3uq-cai sign_and_submit \
      '("main", record {
          sign_inputs = vec { 0 : nat32 };      # indexes of the Scroll inputs
          prev_txs = vec { "0200000000…" };      # txs that created the spent outputs
@@ -52,9 +52,10 @@ programmable custody enforced by Charms logic.
    `{ txid, wtxid }`. Re-broadcasting an already-confirmed transaction is
    idempotent.
 
-## Calling without dfx
+## Calling programmatically
 
-Call the v15 canister with any Internet Computer agent (`ic-agent`/agent-rs).
+Call the v15 canister with any Internet Computer agent (`ic-agent`/agent-rs) from
+your application code instead of the [`icp` CLI](https://internetcomputer.org/docs/building-apps/developer-tools/icp-cli).
 The `scrolls-api` HTTP wrapper (`POST /{network}/sign`) targets the older **v14**
 canister and its nonce-based addresses — use it only for legacy v14 Scroll UTXOs,
 not for v15.
