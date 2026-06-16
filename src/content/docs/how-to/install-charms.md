@@ -20,7 +20,7 @@ This guide installs the `charms` command-line tool. To run your own prover, see
   # or: apt-get install protobuf-compiler
   ```
 
-- The **WebAssembly target** used to build apps:
+- The **WebAssembly target** to build Charms apps:
 
   ```sh
   rustup target add wasm32-wasip1
@@ -29,10 +29,11 @@ This guide installs the `charms` command-line tool. To run your own prover, see
 ## Install the CLI
 
 ```sh
-## important to have this end with `/target` (a dependency issue)
-export CARGO_TARGET_DIR=$(mktemp -d)/target
-cargo install --locked charms
+cargo install charms --locked
 ```
+
+If you want to run your own prover, see
+[Run a prover server](/how-to/run-a-prover-server) instead (it builds the `charms-prover` binary).
 
 ## Verify
 

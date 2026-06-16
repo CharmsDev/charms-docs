@@ -11,16 +11,14 @@ is the `charms-prover` binary: the same code as the `charms` CLI, built with the
 ## Build `charms-prover`
 
 ```sh
-git clone https://github.com/CharmsDev/charms
-cd charms
-cargo install --path . --locked --bin charms-prover --features prover
+cargo install charms --locked --bin charms-prover --features prover
 ```
 
 ## Run the server
 
 ```sh
 charms-prover server                       # binds 0.0.0.0:17784
-charms-prover server --ip 127.0.0.1 --port 8080
+charms-prover server --ip 127.0.0.1 --port 17784
 ```
 
 It exposes `POST /spells/prove` and `GET /ready`. Check readiness:
