@@ -21,7 +21,7 @@ Both expose the same subcommands; only `charms-prover` can generate real proofs
 locally. Install the CLI with:
 
 ```sh
-cargo install --locked charms
+cargo install charms --locked
 ```
 
 See [Install Charms](/how-to/install-charms) for prerequisites and
@@ -91,7 +91,9 @@ Verify that the signature(s) match the binary. `--sig` default
 ### `charms spell check`
 
 Validate a spell and run its app contracts **locally** (in WebAssembly, no
-proof). Prints the resolved spell and the cycles each app used.
+proof). On success, prints per-app cycle counts to **stderr** (for example
+`cycles spent: [0, 42]`). May also print simple-transfer notices and warnings
+about unbound Scrolls outputs (binding happens on the prover server).
 
 ```sh
 charms spell check \
@@ -104,13 +106,13 @@ charms spell check \
 | Option | Description |
 | --- | --- |
 | `--spell <FILE>` | Spell YAML/JSON. Default: `/dev/stdin`. |
-| `--private-inputs <FILE>` | YAML/JSON map of app → private input (`w`). |
-| `--beamed-from <STRING>` | YAML/JSON map `input_index -> [source_utxo, nonce]` for [beamed](/concepts/beaming) inputs. |
+| `--private-inputs <FILE>` | YAML/JSON map `tag/identity_hex/vk_hex` → app-specific private input data. |
+| `--beamed-from <STRING>` | YAML/JSON map `input_index -> ["txid:vout"]` or `["txid:vout", nonce]` for [beamed](/concepts/beaming) inputs (`nonce` optional). |
 | `--app-bins <WASM>...` | App `.wasm` binaries (repeatable). |
-| `--app-signatures <FILE>` | YAML/JSON map `vk -> {public_key, signature}` for versioned apps. |
-| `--prev-txs <HEX>...` | Prerequisite transactions (repeatable). Plain hex, `!bitcoin …`/`!cardano …` tagged forms, or JSON `{"bitcoin":"…"}`. |
+| `--app-signatures <FILE>` | YAML/JSON map `vk_hex -> {public_key, signature}` for versioned apps. |
+| `--prev-txs <HEX>...` | Prerequisite transactions (repeatable, optional). Each value may be plain hex (auto-detected), YAML-tagged (`!bitcoin …` / `!cardano …`), JSON `{"bitcoin":"…"}` / `{"cardano":"…"}`, or a finality-proof object for [beamed](/concepts/beaming) sources. |
 | `--chain <CHAIN>` | `bitcoin` (default) or `cardano`. |
-| `--mock` | Relax proof-related strictness (mock mode). |
+| `--mock` | Accept mock proofs when resolving prerequisite spells. |
 
 ### `charms spell prove`
 
@@ -120,20 +122,27 @@ Prove a spell and emit ready-to-broadcast transaction(s). Accepts every
 | Option | Description |
 | --- | --- |
 | `--change-address <ADDR>` | **Required.** Change address for the target chain. |
-| `--fee-rate <SATS_PER_VB>` | Bitcoin fee rate. Default `2.0` (must be ≥ `1.0`). |
-| `--collateral-utxo <txid:vout>` | **Required for `--chain cardano`.** Collateral UTXO. |
-| `--payload` | Print the [Prover API](/reference/prover-api) request instead of proving. |
+| `--fee-rate <SATS_PER_VB>` | Bitcoin fee rate in sats/vB. Default `2.0` (must be ≥ `1.0`). Ignored for Cardano. |
+| `--collateral-utxo <txid:vout>` | **Required for `--chain cardano`.** Collateral UTXO (alias: `--collateral`). |
+| `--payload` | Print the [Prover API](/reference/prover-api) `ProveRequest` instead of proving. |
 | `-o, --output <json\|cbor>` | Payload format (with `--payload`). Default `json`. |
+| `--mock` | Prove locally in mock mode instead of calling the hosted API (requires a local prover for Bitcoin Scrolls spells). |
 
 On Bitcoin, prints a JSON array with the single unsigned spell transaction:
-`[{"bitcoin":"<hex>"}]`. On Cardano, prints a Ledger CDDL transaction envelope.
-By default the `charms` binary forwards the proving request to the hosted
-[Prover API](/reference/prover-api); build with `--features prover` (the
-`charms-prover` binary) to prove locally.
+`[{"bitcoin":"<hex>"}]`. On Cardano, prints a Ledger CDDL JSON envelope:
+
+```json
+{ "type": "Witnessed Tx ConwayEra", "description": "Ledger Cddl Format", "cborHex": "…" }
+```
+
+By default the `charms` binary forwards the proving request (CBOR) to the hosted
+[Prover API](/reference/prover-api) (`CHARMS_PROVE_API_URL` overrides the URL).
+Build with `--features prover` (the `charms-prover` binary) to prove locally.
 
 ### `charms spell vk`
 
-Print the spell verification key as JSON (pass `--mock` for the mock key), e.g.:
+Print the spell verification key as JSON. `prover` is `true` when built as
+`charms-prover`. With `--mock`, adds `"mock": true` and uses the mock spell vk:
 
 ```json
 { "prover": false, "version": 15, "vk": "00425796f4c4fa050043eee14d801b4f935244e44aad6a28de0cd5cb3de0ae52" }
@@ -147,8 +156,9 @@ Extract and verify the spell embedded in a transaction.
 charms tx show-spell --tx <HEX> [--chain bitcoin|cardano] [--json] [--mock]
 ```
 
-Prints the spell as YAML (default) or JSON (`--json`). Returns nothing if the
-transaction carries no valid spell.
+Prints the spell as YAML (default) or JSON (`--json`). If the transaction
+carries no valid spell, prints `No spell found in the transaction` to stderr.
+`--chain` defaults to `bitcoin`.
 
 ## `charms wallet list`
 
@@ -156,8 +166,10 @@ transaction carries no valid spell.
 charms wallet list [--json] [--mock]
 ```
 
-List the UTXOs in your local `bitcoin-cli` wallet that carry charms (Bitcoin
-only). Shells out to `bitcoin-cli listunspent` and `getrawtransaction`.
+List wallet UTXOs that carry charms (Bitcoin only). Shells out to
+`bitcoin-cli listunspent 0` and `getrawtransaction`. Prints one YAML document
+per match (with `---` separators) or pretty-printed JSON per match (`--json`).
+Progress messages go to stderr.
 
 ## `charms util`
 
@@ -170,9 +182,10 @@ charms util dest --addr <ADDRESS> [--chain bitcoin|cardano]
 charms util dest --apps <tag/identity/vk>... --chain cardano
 ```
 
-Exactly one of `--addr` (any address) or `--apps` (Cardano proxy-script address)
-is required. The chain is auto-detected from the address when `--chain` is
-omitted.
+Exactly one of `--addr` (Bitcoin or Cardano address) or `--apps` (Cardano
+proxy-script address from app ids) is required. When `--chain` is omitted,
+`--addr` is auto-detected (Cardano first, then Bitcoin). `--apps` requires
+Cardano and fails if `--chain bitcoin` is set.
 
 ### `charms util install-circuit-files`
 
