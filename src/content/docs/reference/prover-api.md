@@ -41,20 +41,21 @@ readability.)
 
 ## Request
 
-`POST /spells/prove` with this body:
+`POST /spells/prove` with a [`ProveRequest`](https://github.com/CharmsDev/charms/blob/main/charms-client/src/request.rs)
+body:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `spell` | object | The spell ([Spell structure](/reference/spell)). In JSON it may be the spell object or its hex-encoded CBOR. |
-| `app_private_inputs` | map | (Optional) app `tag/identity/vk` → private input (`w`). Omit when empty. |
-| `tx_ins_beamed_source_utxos` | map | (Optional) input index → `[source_utxo, nonce]` for [beamed](/concepts/beaming) inputs. Omit when empty. |
-| `binaries` | map | (Optional) app `vk` (hex) → app `.wasm` bytes (base64 in JSON). Omit when empty. |
-| `app_signatures` | map | (Optional) app `vk` (hex) → `{ public_key, signature }` for [versioned apps](/concepts/apps#immutable-and-versioned-apps). Omit when empty. |
-| `prev_txs` | array | Prerequisite transactions, chain-tagged: `{"bitcoin":"<hex>"}` / `{"cardano":"<hex>"}` (and finality-proof forms for beaming). |
-| `change_address` | string | **Required.** Change address for the target chain. |
-| `fee_rate` | number | Bitcoin fee rate (sats/vB). Defaults to `0.0` if omitted (the CLI defaults to `2.0`). |
-| `chain` | string | `bitcoin` or `cardano`. |
-| `collateral_utxo` | string | (Optional) `txid:vout` collateral. **Required for Cardano.** |
+| Field | Type | Description                                                                                                                                                                                                                                                                                                                    |
+| --- | --- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `spell` | object or string | **Required.** The spell ([Spell structure](/reference/spell), a `NormalizedSpell`). In JSON, the spell object's hex-encoded CBOR.                                                                                                                                                                                         |
+| `app_private_inputs` | map | (Optional) App key `tag/identity_hex/vk_hex` → private input as hex-encoded CBOR. Omit when empty.                                                                                                                                                                                                                             |
+| `tx_ins_beamed_source_utxos` | map | (Optional) Input index → `["txid:vout"]` or `["txid:vout", nonce]` for [beamed](/concepts/beaming) inputs (`nonce` is an optional `u64`). Omit when empty.                                                                                                                                                                     |
+| `binaries` | map | (Optional) App `vk` (64-char hex) → app `.wasm` bytes (base64 in JSON). Omit when empty.                                                                                                                                                                                                                                       |
+| `app_signatures` | map | (Optional) App `vk` (64-char hex) → `{ "public_key": "<64-char hex>", "signature": "<128-char hex>" }` for [versioned apps](/concepts/apps#immutable-and-versioned-apps). Omit when empty.                                                                                                                                     |
+| `prev_txs` | array | (Optional) Prerequisite transactions. Each entry is chain-tagged: `{"bitcoin":"<hex>"}` or `{"cardano":"<hex>"}`; for [beamed](/concepts/beaming) sources, use finality-proof forms — `{"bitcoin":{"tx":"<hex>","proof":"<hex>","headers":["<hex>",…]}}` or `{"cardano":{"tx":"<hex>","signature":"<hex>"}}`. Omit when empty. |
+| `change_address` | string | **Required.** Change address for the target chain.                                                                                                                                                                                                                                                                             |
+| `fee_rate` | number | (Optional) Bitcoin fee rate in sats/vB. Defaults to `0.0` if omitted (the CLI defaults to `2.0`). Ignored for Cardano.                                                                                                                                                                                                         |
+| `chain` | string | **Required.** `bitcoin` or `cardano`.                                                                                                                                                                                                                                                                                          |
+| `collateral_utxo` | string | (Optional) Collateral UTXO as `txid:vout`. **Required for Cardano.**                                                                                                                                                                                                                                                           |
 
 ### Example
 
