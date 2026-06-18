@@ -76,11 +76,11 @@ mechanics differ in three ways:
    (`charms spell prove --collateral-utxo …`). Cardano spell transactions are
    also co-signed by a [Scrolls](/concepts/scrolls) canister.
 
-## Prerequisite transactions
+## Prerequisite (previous) transactions
 
 Verifying a spell requires the transactions that produced its inputs — the
-**prerequisite transactions** (`prev_txs`). They let the verifier recover the
+**previous transactions** (`prev_txs`). They let the verifier recover the
 charms being spent and confirm that each input's own spell was correct. When you
 prove or check a spell, you pass these transactions explicitly. In cross-chain
-[beaming](/concepts/beaming), a prerequisite transaction also carries a
+[beaming](/concepts/beaming), a previous transaction also carries a
 *finality proof* showing it is irreversibly confirmed on its origin chain.

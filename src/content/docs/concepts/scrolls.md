@@ -26,8 +26,9 @@ transaction that created it.
 The decisive property is the canister's **signing policy**. It will sign a spend
 only if the spending transaction:
 
-1. carries a **valid Charms spell**, and
-2. pays the configured protocol **fee**.
+1. carries a **valid Charms spell**,
+2. pays the configured protocol **fee**,
+3. only spends a Scrolls output **once** per unique Scrolls address.
 
 That is what makes the custody *programmable*: funds are released not by
 presenting a key, but by satisfying on-chain Charms logic — a verified
@@ -37,16 +38,16 @@ controllers), so no human can override the policy.
 ## Scroll charms
 
 The charm tag `s` denotes a **Scroll**. A Bitcoin output carrying a Scroll charm
-can only be created at a Scrolls-canister-controlled address. The link is
+can only be created at a Scrolls canister controlled address. The link is
 enforced inside the proof: when a spell creates a Scroll output, the prover asks
 the canister for the controlling `scriptPubKey` (via its
 [`addresses`](/reference/scrolls-canister#addresses) method, signed by the
 canister), pins that address into the output, and the spell proof verifies the
 canister's signature. Later, spending that output requires the canister to
-co-sign — which it does only for a valid spell. (On Cardano, a Scroll app behaves
-like any other non-token app.)
+co-sign — which it does only for a valid spell. On Cardano, a Scroll app behaves
+like any other non-token app: Cardano itself enforces the Scroll's smart contract.
 
-The result is an output that is provably locked to programmable custody: its
+The result is an output provably locked to programmable custody: its
 fate is decided by Charms logic, with the Scrolls canister as the agent that
 enforces it.
 

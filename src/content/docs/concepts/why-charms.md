@@ -5,17 +5,16 @@ sidebar:
   order: 1
 ---
 
-Charms is a **programmable assets** protocol and toolkit for Bitcoin (and, as of
-v15, Cardano too), designed to be **developer-friendly**.
+Charms is a **programmable assets** protocol and toolkit for Bitcoin (and, recently, Cardano too), designed to be **developer-friendly**.
 
-Q: There are already several token standards out there, even on Bitcoin. Why
+There are already several token standards for Bitcoin. Why
 create another one?
 
 In short, because none of them are **programmable**, or particularly
-developer-friendly. And we are fixing this.
+developer-friendly. We are fixing this.
 
 We believe in the magic of programmability. We also believe in the
-decentralization and security of Bitcoin. An under-appreciated aspect of
+decentralization and security of Bitcoin. An underappreciated aspect of
 Bitcoin's security is its UTXO model. It's widely believed that the UTXO model
 is "hard" to make programmable. But, with Charms, not impossible 😼
 
@@ -24,7 +23,7 @@ directly **on Bitcoin**.
 
 Because this is kind of magical, we call such tokens *charms*.
 
-## What are charms
+## What are Charms
 
 Put simply, _charms_ are programmable tokens on top of Bitcoin UTXOs.
 
@@ -65,14 +64,14 @@ want with the *charms* in it (even destroy them).
 
 To learn how apps define and govern charms, read [Apps](/concepts/apps).
 
-## How are charms created
+## How are charms created?
 
 *Charms* come into existence by the magic of *[spells](/concepts/spells)*
 added to blockchain transactions.
 
 ## Bitcoin and beyond
 
-Charms started on Bitcoin and the protocol is designed around Bitcoin's UTXO
+Charms started on Bitcoin, and the protocol is designed around Bitcoin's UTXO
 model. As of v15, the same charms can also live on **Cardano** (an eUTXO chain),
 and they can move between chains through [beaming](/concepts/beaming) — a
 trust-minimized teleport that needs no custodial bridge.
@@ -92,5 +91,4 @@ artifacts](https://docs.ordinals.com/digital-artifacts.html) and collectibles
 (with concepts like rarity of a name).
 
 Charms aim to address **programmability** and **composability**: you can have
-multiple apps interacting with each other. Charms could (perhaps in a not too
-distant future) even work with Runes.
+multiple apps interacting with each other. Charms could even work with Runes.
