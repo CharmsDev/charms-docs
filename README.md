@@ -1,54 +1,52 @@
-# Starlight Starter Kit: Basics
+# Charms documentation
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+The documentation site for [Charms](https://charms.dev) — programmable tokens on
+Bitcoin (and beyond). Built with [Astro](https://astro.build) +
+[Starlight](https://starlight.astro.build) and deployed to
+[charms.dev](https://charms.dev).
 
+This site documents **Charms v15**. The protocol source lives at
+[github.com/CharmsDev/charms](https://github.com/CharmsDev/charms).
+
+## Structure
+
+Content lives in `src/content/docs/` and is organized with the
+[Diátaxis](https://diataxis.fr) framework — four sections, each serving a
+distinct need:
+
+| Section | Directory | For |
+| --- | --- | --- |
+| **Concepts** | `concepts/` | Understanding the ideas behind Charms. |
+| **Tutorials** | `tutorials/` | Learning by doing (start here). |
+| **How-to guides** | `how-to/` | Accomplishing specific tasks. |
+| **Reference** | `reference/` | Looking up exact formats and APIs. |
+
+The sidebar and redirects from old URLs are configured in `astro.config.mjs`.
+Each page is also served as raw Markdown at its `.md` URL (see
+`src/pages/[...slug].md.ts`).
+
+## Develop
+
+```sh
+npm install
+npm run dev        # local dev server at http://localhost:4321
 ```
-npm create astro@latest -- --template starlight
-```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/withastro/starlight&create_from_path=examples/basics)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fbasics&project-name=my-starlight-docs&repository-name=my-starlight-docs)
+| Command | Action |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Build the production site to `./dist/` |
+| `npm run preview` | Preview the production build locally |
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Contributing
 
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   ├── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
-
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
-
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
-
-Static assets, like favicons, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+- Put each page in the section that matches its *purpose*, not its topic — a
+  single topic (e.g. spells) legitimately appears across tutorials, how-to,
+  concepts, and reference.
+- Keep the types distinct: tutorials don't dwell on options, how-to guides don't
+  explain theory, reference stays factual, concepts avoid step-by-step
+  instructions.
+- Internal links are root-relative and omit the trailing slash
+  (`/reference/spell`), matching `trailingSlash: 'never'`.
+- Verify changes build with `npm run build` before opening a PR.

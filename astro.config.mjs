@@ -4,6 +4,32 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://charms.dev',
+	trailingSlash: 'never',
+	// Redirects from the pre-Diátaxis URLs to their new homes.
+	redirects: {
+		'/explanation': '/concepts',
+		'/explanation/why-charms': '/concepts/why-charms',
+		'/explanation/apps': '/concepts/apps',
+		'/explanation/spells': '/concepts/spells',
+		'/explanation/transactions': '/concepts/transactions',
+		'/explanation/beaming': '/concepts/beaming',
+		'/explanation/scrolls': '/concepts/scrolls',
+		'/concepts/why': '/concepts/why-charms',
+		'/guides/charms-apps/introduction': '/tutorials',
+		'/guides/charms-apps/pre-reqs': '/how-to/set-up-a-bitcoin-node',
+		'/guides/charms-apps/get-started': '/tutorials/build-a-charms-app',
+		'/guides/charms-apps/cast-spell': '/tutorials/cast-your-first-spell',
+		'/guides/wallet-integration/introduction': '/how-to/wallet-integration',
+		'/guides/wallet-integration/visualization': '/how-to/wallet-integration/display-charms',
+		'/guides/wallet-integration/transactions/overview': '/how-to/wallet-integration',
+		'/guides/wallet-integration/transactions/nft': '/how-to/wallet-integration/transfer-nfts',
+		'/guides/wallet-integration/transactions/token': '/how-to/wallet-integration/transfer-tokens',
+		'/guides/wallet-integration/transactions/prover-api': '/how-to/call-the-prover-api',
+		'/guides/wallet-integration/transactions/signing': '/how-to/wallet-integration/sign-and-broadcast',
+		'/guides/wallet-integration/transactions/broadcasting': '/how-to/wallet-integration/sign-and-broadcast',
+		'/references/spell-json': '/reference/spell',
+	},
 	integrations: [
 		starlight({
 			title: 'Charms',
@@ -39,79 +65,70 @@ export default defineConfig({
 					label: 'GitHub',
 				},
 			],
+			// The sidebar follows the Diátaxis framework (https://diataxis.fr):
+			// Concepts (understanding), Tutorials (learning), How-to guides
+			// (tasks), and Reference (information).
 			sidebar: [
 				{
 					label: 'Concepts',
-					autogenerate: { directory: 'concepts' },
+					items: [
+						{ label: 'Overview', link: '/concepts' },
+						{ label: 'Why Charms?', link: '/concepts/why-charms' },
+						{ label: 'Apps', link: '/concepts/apps' },
+						{ label: 'Spells', link: '/concepts/spells' },
+						{ label: 'Transactions', link: '/concepts/transactions' },
+						{ label: 'Beaming', link: '/concepts/beaming' },
+						{ label: 'Scrolls', link: '/concepts/scrolls' },
+					],
 				},
 				{
-					label: 'Guides',
+					label: 'Tutorials',
 					items: [
+						{ label: 'Overview', link: '/tutorials' },
+						{ label: 'Build a Charms app', link: '/tutorials/build-a-charms-app' },
+						{ label: 'Cast your first spell', link: '/tutorials/cast-your-first-spell' },
+					],
+				},
+				{
+					label: 'How-to guides',
+					items: [
+						{ label: 'Overview', link: '/how-to' },
+						{ label: 'Install Charms', link: '/how-to/install-charms' },
+						{ label: 'Set up a Bitcoin node', link: '/how-to/set-up-a-bitcoin-node' },
+						{ label: 'Write an app contract', link: '/how-to/write-an-app-contract' },
+						{ label: 'Manage app keys', link: '/how-to/manage-app-keys' },
+						{ label: 'Call the Prover API', link: '/how-to/call-the-prover-api' },
+						{ label: 'Run a prover server', link: '/how-to/run-a-prover-server' },
+						{ label: 'Beam charms across chains', link: '/how-to/beam-charms' },
+						{ label: 'Spend Scroll outputs', link: '/how-to/spend-scroll-outputs' },
 						{
-							label: 'Charms Apps',
-							collapsed: false,
-							autogenerate: { directory: 'guides/charms-apps' },
-						},
-						{
-							label: 'Wallet Integration',
-							collapsed: false,
+							label: 'Wallet integration',
 							items: [
-								{
-									label: 'Introduction',
-									link: '/guides/wallet-integration/introduction/',
-								},
-								{
-									label: 'Charms Visualization',
-									link: '/guides/wallet-integration/visualization/',
-								},
-								{
-									label: 'Charms Transactions',
-									collapsed: false,
-									items: [
-										{
-											label: 'Transactions Overview',
-											link: '/guides/wallet-integration/transactions/overview/',
-										},
-										{
-											label: 'NFT Transfers',
-											link: '/guides/wallet-integration/transactions/nft/',
-										},
-										{
-											label: 'Token Transfers',
-											link: '/guides/wallet-integration/transactions/token/',
-										},
-										{
-											label: 'Prover API',
-											link: '/guides/wallet-integration/transactions/prover-api/',
-										},
-										{
-											label: 'Signing Transactions',
-											link: '/guides/wallet-integration/transactions/signing/',
-										},
-										{
-											label: 'Broadcasting Transactions',
-											link: '/guides/wallet-integration/transactions/broadcasting/',
-										},
-									],
-								},
+								{ label: 'Overview', link: '/how-to/wallet-integration' },
+								{ label: 'Display charms', link: '/how-to/wallet-integration/display-charms' },
+								{ label: 'Transfer NFTs', link: '/how-to/wallet-integration/transfer-nfts' },
+								{ label: 'Transfer tokens', link: '/how-to/wallet-integration/transfer-tokens' },
+								{ label: 'Sign and broadcast', link: '/how-to/wallet-integration/sign-and-broadcast' },
 							],
 						},
 					],
 				},
 				{
-					label: 'References',
-					collapsed: false,
+					label: 'Reference',
 					items: [
-						{
-							label: 'Spell JSON Reference',
-							link: '/references/spell-json/',
-						},
+						{ label: 'Overview', link: '/reference' },
+						{ label: 'CLI', link: '/reference/cli' },
+						{ label: 'Spell structure', link: '/reference/spell' },
+						{ label: 'SDK', link: '/reference/sdk' },
+						{ label: 'Prover API', link: '/reference/prover-api' },
+						{ label: 'Scrolls canisters', link: '/reference/scrolls-canister' },
 					],
 				},
 				{
 					label: 'Whitepaper',
 					link: '/Charms-whitepaper.pdf',
-				}
+					attrs: { target: '_blank' },
+				},
 			],
 		}),
 	],
