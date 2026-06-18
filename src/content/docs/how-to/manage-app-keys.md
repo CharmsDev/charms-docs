@@ -8,7 +8,7 @@ exact Wasm binary, so the code can never change. A **versioned app** instead pin
 its verification key to a *signing key*, letting you upgrade the binary over time
 by signing each new version. This guide covers the versioned-app workflow. For
 the trade-offs, see
-[Apps](/explanation/apps#immutable-and-versioned-apps).
+[Apps](/concepts/apps#immutable-and-versioned-apps).
 
 ## When to use a versioned app
 

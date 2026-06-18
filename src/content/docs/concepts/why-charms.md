@@ -63,18 +63,18 @@ A *string of charms* is created or spent as one unit, just like a Bitcoin UTXO.
 *charmed*). Because of this, whoever owns a Bitcoin UTXO can do whatever they
 want with the *charms* in it (even destroy them).
 
-To learn how apps define and govern charms, read [Apps](/explanation/apps).
+To learn how apps define and govern charms, read [Apps](/concepts/apps).
 
 ## How are charms created
 
-*Charms* come into existence by the magic of *[spells](/explanation/spells)*
+*Charms* come into existence by the magic of *[spells](/concepts/spells)*
 added to blockchain transactions.
 
 ## Bitcoin and beyond
 
 Charms started on Bitcoin and the protocol is designed around Bitcoin's UTXO
 model. As of v15, the same charms can also live on **Cardano** (an eUTXO chain),
-and they can move between chains through [beaming](/explanation/beaming) — a
+and they can move between chains through [beaming](/concepts/beaming) — a
 trust-minimized teleport that needs no custodial bridge.
 
 ## Difference from Runes
@@ -85,7 +85,7 @@ for Charms (among other things).
 Runes are tokens on top of Bitcoin, managed by *runestones* — metadata messages
 (in `OP_RETURN` outputs) directing the minting and transferring of *runes* (the
 Runes tokens). Runestones can be viewed as a kind of
-[spells](/explanation/spells).
+[spells](/concepts/spells).
 
 Runes lean towards [digital
 artifacts](https://docs.ordinals.com/digital-artifacts.html) and collectibles

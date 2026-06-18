@@ -6,7 +6,7 @@ description: "Learn Charms by building: from an empty directory to a charm on Bi
 New to Charms? These tutorials take you, step by step, from nothing to a real
 charm on Bitcoin. Follow them in order — each one builds on the last. You don't
 need to understand everything as you go; the goal is to *do* it and see it work.
-Once you have, the [Explanation](/explanation) section fills in the why, and the
+Once you have, the [Concepts](/concepts) section fills in the why, and the
 [Reference](/reference) section has the details.
 
 1. **[Build a Charms app](/tutorials/build-a-charms-app)** — install the tools,

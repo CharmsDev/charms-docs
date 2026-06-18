@@ -5,7 +5,7 @@ description: "Task-oriented recipes for working with Charms."
 
 Practical, goal-oriented recipes. Each guide assumes you already know the
 basics — if you're new, start with the [Tutorials](/tutorials); for the ideas
-behind these tasks, see [Explanation](/explanation); for exact formats, see
+behind these tasks, see [Concepts](/concepts); for exact formats, see
 [Reference](/reference).
 
 ### Set up

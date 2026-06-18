@@ -77,7 +77,7 @@ app_public_inputs:
 In this example:
 
 - **`app_public_inputs`** is the map of all apps involved in the spell. Each key
-  is an app `tag/identity/vk` (see [Apps](/explanation/apps)), and each value is
+  is an app `tag/identity/vk` (see [Apps](/concepts/apps)), and each value is
   that app's public input data (empty here, as it is for simple transfers).
 - **`tx.ins`** lists the input UTXOs (`txid:vout`) the transaction spends.
 - **`tx.outs`** lists the output *strings of charms*. In each output, the keys
@@ -110,4 +110,4 @@ is correct in milliseconds — without re-running any app code.
 
 This proof is produced by the [Prover API](/reference/prover-api). For *how* the
 proof and spell are attached to a real transaction, see
-[Transactions](/explanation/transactions).
+[Transactions](/concepts/transactions).

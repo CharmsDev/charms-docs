@@ -6,7 +6,7 @@ sidebar:
 ---
 
 The Prover API turns a spell into a proven, ready-to-broadcast transaction. It
-runs the app contracts, generates the [proof](/explanation/spells#the-proof), and
+runs the app contracts, generates the [proof](/concepts/spells#the-proof), and
 builds the chain transaction(s). Use the hosted service or
 [run your own](/how-to/run-a-prover-server).
 
@@ -47,9 +47,9 @@ readability.)
 | --- | --- | --- |
 | `spell` | object | The spell ([Spell structure](/reference/spell)). In JSON it may be the spell object or its hex-encoded CBOR. |
 | `app_private_inputs` | map | (Optional) app `tag/identity/vk` → private input (`w`). Omit when empty. |
-| `tx_ins_beamed_source_utxos` | map | (Optional) input index → `[source_utxo, nonce]` for [beamed](/explanation/beaming) inputs. Omit when empty. |
+| `tx_ins_beamed_source_utxos` | map | (Optional) input index → `[source_utxo, nonce]` for [beamed](/concepts/beaming) inputs. Omit when empty. |
 | `binaries` | map | (Optional) app `vk` (hex) → app `.wasm` bytes (base64 in JSON). Omit when empty. |
-| `app_signatures` | map | (Optional) app `vk` (hex) → `{ public_key, signature }` for [versioned apps](/explanation/apps#immutable-and-versioned-apps). Omit when empty. |
+| `app_signatures` | map | (Optional) app `vk` (hex) → `{ public_key, signature }` for [versioned apps](/concepts/apps#immutable-and-versioned-apps). Omit when empty. |
 | `prev_txs` | array | Prerequisite transactions, chain-tagged: `{"bitcoin":"<hex>"}` / `{"cardano":"<hex>"}` (and finality-proof forms for beaming). |
 | `change_address` | string | **Required.** Change address for the target chain. |
 | `fee_rate` | number | Bitcoin fee rate (sats/vB). Defaults to `0.0` if omitted (the CLI defaults to `2.0`). |
@@ -106,7 +106,7 @@ broadcast it. See
 
 - Proving runs the app contracts, so include every app's binary in `binaries`
   (or `--app-bins`) for any operation beyond a simple transfer.
-- For [Scroll](/explanation/scrolls) outputs on Bitcoin, the prover fills the
+- For [Scroll](/concepts/scrolls) outputs on Bitcoin, the prover fills the
   `dest` script automatically by calling the Scrolls canister — only a prover
   *server* (not mock mode) can do this.
 - The `spell.tx.ins` and `spell.tx.coins` you send are used to build the

@@ -3,7 +3,7 @@ title: Spend Scroll outputs
 description: "Spend a Scrolls-controlled Bitcoin output with the canister's sign_and_submit method."
 ---
 
-A Bitcoin output carrying a [Scroll](/explanation/scrolls) charm is locked to an
+A Bitcoin output carrying a [Scroll](/concepts/scrolls) charm is locked to an
 address controlled by the `scrolls_bitcoin_v15` canister — no single private key
 can spend it. To spend it, you build the transaction, sign your *own* inputs, and
 ask the canister to sign its inputs and broadcast. This guide uses the canister's
@@ -17,7 +17,7 @@ The canister will sign a Scroll input only if the transaction:
 2. pays the configured Scrolls **protocol fee**.
 
 So you can't move Scroll-controlled funds arbitrarily — only via a transaction
-whose spell is correct. That is the whole point of [Scrolls](/explanation/scrolls):
+whose spell is correct. That is the whole point of [Scrolls](/concepts/scrolls):
 programmable custody enforced by Charms logic.
 
 ## Steps

@@ -5,7 +5,7 @@ description: "Implement the app_contract predicate that governs your charms."
 
 An app's logic is a single Rust function, the **app contract**. This guide shows
 how to implement one, starting from the generated template. For the concepts, see
-[Apps](/explanation/apps); for the exact API, see the [SDK reference](/reference/sdk).
+[Apps](/concepts/apps); for the exact API, see the [SDK reference](/reference/sdk).
 
 ## Scaffold a project
 
@@ -105,7 +105,7 @@ fn can_mint_token(token_app: &App, tx: &Transaction) -> bool {
   is never published. The template requires `x` to be empty and uses `w` for the
   minting UTXO.
 - **Allow simple transfers cheaply.** Moving an NFT or tokens without minting is a
-  [simple transfer](/explanation/apps#simple-transfers-need-no-contract) and does
+  [simple transfer](/concepts/apps#simple-transfers-need-no-contract) and does
   not run your contract at all — only mint/burn/custom operations do. You can use
   `is_simple_transfer`, `token_amounts_balanced`, and `nft_state_preserved` from
   the SDK when you want to special-case them.

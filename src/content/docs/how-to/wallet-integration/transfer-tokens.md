@@ -6,7 +6,7 @@ description: "Build a spell that sends fungible-token charms."
 A token transfer spends one or more outputs holding a token and creates
 destination outputs whose total token amount equals the input total. Like NFT
 transfers, this is a
-[simple transfer](/explanation/apps#simple-transfers-need-no-contract) — no app
+[simple transfer](/concepts/apps#simple-transfers-need-no-contract) — no app
 binary or contract proof required.
 
 ## The spell

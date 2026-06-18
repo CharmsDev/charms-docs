@@ -8,9 +8,14 @@ export default defineConfig({
 	trailingSlash: 'never',
 	// Redirects from the pre-Diátaxis URLs to their new homes.
 	redirects: {
-		'/concepts/why': '/explanation/why-charms',
-		'/concepts/apps': '/explanation/apps',
-		'/concepts/spells': '/explanation/spells',
+		'/explanation': '/concepts',
+		'/explanation/why-charms': '/concepts/why-charms',
+		'/explanation/apps': '/concepts/apps',
+		'/explanation/spells': '/concepts/spells',
+		'/explanation/transactions': '/concepts/transactions',
+		'/explanation/beaming': '/concepts/beaming',
+		'/explanation/scrolls': '/concepts/scrolls',
+		'/concepts/why': '/concepts/why-charms',
 		'/guides/charms-apps/introduction': '/tutorials',
 		'/guides/charms-apps/pre-reqs': '/how-to/set-up-a-bitcoin-node',
 		'/guides/charms-apps/get-started': '/tutorials/build-a-charms-app',
@@ -61,9 +66,21 @@ export default defineConfig({
 				},
 			],
 			// The sidebar follows the Diátaxis framework (https://diataxis.fr):
-			// Tutorials (learning), How-to guides (tasks), Explanation
-			// (understanding), and Reference (information).
+			// Concepts (understanding), Tutorials (learning), How-to guides
+			// (tasks), and Reference (information).
 			sidebar: [
+				{
+					label: 'Concepts',
+					items: [
+						{ label: 'Overview', link: '/concepts' },
+						{ label: 'Why Charms?', link: '/concepts/why-charms' },
+						{ label: 'Apps', link: '/concepts/apps' },
+						{ label: 'Spells', link: '/concepts/spells' },
+						{ label: 'Transactions', link: '/concepts/transactions' },
+						{ label: 'Beaming', link: '/concepts/beaming' },
+						{ label: 'Scrolls', link: '/concepts/scrolls' },
+					],
+				},
 				{
 					label: 'Tutorials',
 					items: [
@@ -94,18 +111,6 @@ export default defineConfig({
 								{ label: 'Sign and broadcast', link: '/how-to/wallet-integration/sign-and-broadcast' },
 							],
 						},
-					],
-				},
-				{
-					label: 'Explanation',
-					items: [
-						{ label: 'Overview', link: '/explanation' },
-						{ label: 'Why Charms?', link: '/explanation/why-charms' },
-						{ label: 'Apps', link: '/explanation/apps' },
-						{ label: 'Spells', link: '/explanation/spells' },
-						{ label: 'Transactions', link: '/explanation/transactions' },
-						{ label: 'Beaming', link: '/explanation/beaming' },
-						{ label: 'Scrolls', link: '/explanation/scrolls' },
 					],
 				},
 				{

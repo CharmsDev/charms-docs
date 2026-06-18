@@ -16,9 +16,9 @@ distinct need:
 
 | Section | Directory | For |
 | --- | --- | --- |
+| **Concepts** | `concepts/` | Understanding the ideas behind Charms. |
 | **Tutorials** | `tutorials/` | Learning by doing (start here). |
 | **How-to guides** | `how-to/` | Accomplishing specific tasks. |
-| **Explanation** | `explanation/` | Understanding the concepts. |
 | **Reference** | `reference/` | Looking up exact formats and APIs. |
 
 The sidebar and redirects from old URLs are configured in `astro.config.mjs`.
@@ -43,9 +43,9 @@ npm run dev        # local dev server at http://localhost:4321
 
 - Put each page in the section that matches its *purpose*, not its topic — a
   single topic (e.g. spells) legitimately appears across tutorials, how-to,
-  explanation, and reference.
+  concepts, and reference.
 - Keep the types distinct: tutorials don't dwell on options, how-to guides don't
-  explain theory, reference stays factual, explanation avoids step-by-step
+  explain theory, reference stays factual, concepts avoid step-by-step
   instructions.
 - Internal links are root-relative and omit the trailing slash
   (`/reference/spell`), matching `trailingSlash: 'never'`.

@@ -40,7 +40,7 @@ tuple (CBOR) from stdin and asserts that `$path(&app, &tx, &x, &w)` returns
 
 ### `charms_sdk::app_version!($version)`
 
-For [versioned apps](/explanation/apps#immutable-and-versioned-apps). Expands to
+For [versioned apps](/concepts/apps#immutable-and-versioned-apps). Expands to
 `pub const VERSION: u32 = $version;` and exports an `__app_version()` function so
 the runtime can confirm the running binary matches the version pinned in the
 spell. Requires Rust edition 2024.

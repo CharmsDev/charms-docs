@@ -14,8 +14,8 @@ authoritative reference for the spell's three faces:
 3. the **on-chain transaction structure** that carries it, on Bitcoin and on
    Cardano.
 
-For the concepts behind it, see [Spells](/explanation/spells) and
-[Transactions](/explanation/transactions).
+For the concepts behind it, see [Spells](/concepts/spells) and
+[Transactions](/concepts/transactions).
 
 ## Logical structure
 
@@ -54,7 +54,7 @@ app_public_inputs:
 | `version` | integer | Protocol version. Use `15` for the current prover. |
 | `tx` | object | The normalized transaction payload (below). |
 | `app_public_inputs` | map | All apps in the spell → each app's public input (`x`). |
-| `versioned_apps` | map | (Optional) `vk -> { version, wasm_hash }` for [versioned apps](/explanation/apps#immutable-and-versioned-apps). Omit when empty. |
+| `versioned_apps` | map | (Optional) `vk -> { version, wasm_hash }` for [versioned apps](/concepts/apps#immutable-and-versioned-apps). Omit when empty. |
 | `mock` | bool | (Optional) `true` only for mock-proving workflows. Omit otherwise. |
 
 :::note
@@ -70,9 +70,9 @@ prover.
 | `ins` | list | Input UTXOs spent (`txid:vout`). Omitted in the serialized form (recovered from the hosting transaction). |
 | `refs` | list | (Optional) reference UTXOs — read, not spent. |
 | `outs` | list | Output *strings of charms*. Each entry maps an **app index** (`0`, `1`, …) to that app's charm data. |
-| `beamed_outs` | map | (Optional) output index → `SHA-256` hash of the destination UTXO id, for [beaming](/explanation/beaming) out. |
+| `beamed_outs` | map | (Optional) output index → `SHA-256` hash of the destination UTXO id, for [beaming](/concepts/beaming) out. |
 | `coins` | list | Native coin outputs (below). One per transaction output. |
-| `scrolls` | list | (Optional) output indexes that carry [Scroll](/explanation/scrolls) charms and must be sent to Scrolls-controlled addresses. |
+| `scrolls` | list | (Optional) output indexes that carry [Scroll](/concepts/scrolls) charms and must be sent to Scrolls-controlled addresses. |
 
 **App indexes.** In `outs` (and `scrolls`, `beamed_outs`), outputs reference apps
 by their **index** into `app_public_inputs`, taken in sorted key order: `0` is
@@ -103,7 +103,7 @@ App keys are `tag/identity/vk`:
 
 - `n/…` — NFT app
 - `t/…` — fungible-token app
-- `s/…` — [Scroll](/explanation/scrolls) app
+- `s/…` — [Scroll](/concepts/scrolls) app
 - any other tag (e.g. `c/…`) — a general app whose logic is fully defined by its
   contract
 
@@ -140,7 +140,7 @@ cbor( (NormalizedSpell, Proof) )
   are both cleared (set to absent). On extraction, the input list is taken from
   the hosting transaction's inputs.
 - **`Proof`** is a byte string: the **Groth16** SNARK (BN254) attesting that the
-  spell is [correct](/explanation/spells#what-makes-a-spell-correct). It is
+  spell is [correct](/concepts/spells#what-makes-a-spell-correct). It is
   produced by an [SP1](https://docs.succinct.xyz/) zkVM pipeline — a
   `charms-spell-checker` proof wrapped into Groth16 — and is recursive, so it
   also covers every prerequisite transaction's spell.
@@ -191,14 +191,14 @@ differently:
   UTXO** is required — pass it as `charms spell prove --collateral-utxo
   <txid:vout>`.
 - **Co-signing.** Cardano spell transactions are signed by the Cardano
-  [Scrolls](/explanation/scrolls) canister as part of proving.
+  [Scrolls](/concepts/scrolls) canister as part of proving.
 
 The Prover API returns Cardano transactions tagged `{"cardano":"<hex>"}` (a
 Ledger CDDL envelope).
 
 ## Beamed inputs
 
-When a spell *receives* a [beamed](/explanation/beaming) charm, the source UTXO
+When a spell *receives* a [beamed](/concepts/beaming) charm, the source UTXO
 on the other chain is supplied out of band (it is not a field of the spell
 itself):
 

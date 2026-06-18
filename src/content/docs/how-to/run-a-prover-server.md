@@ -85,7 +85,7 @@ charms-prover server
 | `RUST_LOG` | Log level, e.g. `info`. |
 
 :::note
-For Bitcoin spells with [Scroll](/explanation/scrolls) outputs, a prover *server*
+For Bitcoin spells with [Scroll](/concepts/scrolls) outputs, a prover *server*
 is required (not mock mode): the server calls the Scrolls canister to fill in the
 Scroll output addresses while proving.
 :::

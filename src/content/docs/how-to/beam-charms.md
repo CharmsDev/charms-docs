@@ -3,11 +3,11 @@ title: Beam charms across chains
 description: "Move a charm from Bitcoin to Cardano (and back) using beaming, with eBTC as the example."
 ---
 
-[Beaming](/explanation/beaming) moves a charm from one chain to another by
+[Beaming](/concepts/beaming) moves a charm from one chain to another by
 destroying it at a source UTXO and re-creating it at a destination UTXO, tied
 together by a hash commitment and a finality proof. This guide walks the flow
 using [eBTC](https://github.com/CharmsDev/ebtc) — a token that can live on both
-Bitcoin and Cardano. Read [Beaming](/explanation/beaming) first for the concepts.
+Bitcoin and Cardano. Read [Beaming](/concepts/beaming) first for the concepts.
 
 A beam is always a **pair** of spells: a *send* on the source chain and a
 *receive* on the destination chain.
@@ -80,7 +80,7 @@ The finality-proof form of `--prev-txs` depends on the **source** chain:
 
   (about six block headers of accumulated work).
 
-- **Source = Cardano** → a [Scrolls](/explanation/scrolls) finality signature:
+- **Source = Cardano** → a [Scrolls](/concepts/scrolls) finality signature:
 
   ```
   --prev-txs="!cardano {tx: <hex>, signature: <ed25519 hex>}"

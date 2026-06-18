@@ -8,7 +8,7 @@ sidebar:
 ## `scrolls_bitcoin_v15`
 
 The `scrolls_bitcoin_v15` canister is the Bitcoin signer for Charms v15. It
-derives the addresses that [Scroll](/explanation/scrolls) outputs are locked to,
+derives the addresses that [Scroll](/concepts/scrolls) outputs are locked to,
 and it signs and broadcasts transactions that spend those outputs — but only when
 the transaction carries a valid Charms spell and pays the protocol fee.
 
@@ -112,7 +112,7 @@ it yourself.
 The signature lets the spell proof verify, in-circuit, that these are genuinely
 the canister's addresses for the given transaction. This is how a Scroll output
 is provably pinned to programmable custody — see
-[Scroll charms](/explanation/scrolls#scroll-charms).
+[Scroll charms](/concepts/scrolls#scroll-charms).
 
 ## Other methods
 
@@ -147,7 +147,7 @@ integrity is protected by a canister-private secret prefix and the signed
 ## `scrolls_cardano`
 
 The `scrolls_cardano` canister co-signs Cardano spell transactions and issues
-finality attestations used when [beaming](/explanation/beaming) out of Cardano.
+finality attestations used when [beaming](/concepts/beaming) out of Cardano.
 
 | | |
 | --- | --- |

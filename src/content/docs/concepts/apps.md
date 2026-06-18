@@ -14,7 +14,7 @@ An app is identified by a triple `tag/identity/vk`:
 
 - **`tag`** — a single character describing the kind of app. Three tags have
   special meaning: `t` for fungible **tokens**, `n` for **NFTs**, and `s` for
-  [**Scrolls**](/explanation/scrolls). Any other character denotes a general
+  [**Scrolls**](/concepts/scrolls). Any other character denotes a general
   app whose logic is defined entirely by its contract.
 - **`identity`** — a 32-byte value identifying a particular asset *within* the
   app (for example, one NFT collection, or one token).

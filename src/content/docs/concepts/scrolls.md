@@ -54,14 +54,14 @@ enforces it.
 
 - **Vaults and programmable custody** — e.g. the eBTC vault, where BTC is locked
   at a Scrolls address and released only by a spell that mints/burns eBTC
-  one-to-one. See [Beaming](/explanation/beaming).
+  one-to-one. See [Beaming](/concepts/beaming).
 - **Automated signing and broadcasting** — a client can build a transaction,
   sign its own inputs, and hand the rest to the canister's
   [`sign_and_submit`](/reference/scrolls-canister#sign_and_submit) method, which
   signs the Scroll inputs, enforces the spell-and-fee policy, broadcasts the
   transaction, and returns its txid.
 - **Cross-chain finality attestation** — the Cardano Scrolls canister signs
-  certifications used as finality proofs when [beaming](/explanation/beaming)
+  certifications used as finality proofs when [beaming](/concepts/beaming)
   out of Cardano.
 
 ## The Bitcoin canister at a glance

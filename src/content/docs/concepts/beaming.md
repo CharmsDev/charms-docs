@@ -63,7 +63,7 @@ origin chain:
   roughly six blocks' worth of accumulated work. No third party is trusted; only
   Bitcoin's own proof-of-work.
 - **From Cardano** — a finality *attestation*: an Ed25519 signature from a
-  [Scrolls](/explanation/scrolls) canister certifying that the Cardano
+  [Scrolls](/concepts/scrolls) canister certifying that the Cardano
   transaction is settled. (Cardano has no compact proof-of-work analogue, so
   finality is attested by the Scrolls signer.)
 
@@ -74,7 +74,7 @@ proof.
 
 ## Beaming and Scrolls
 
-Beaming and [Scrolls](/explanation/scrolls) are distinct mechanisms that share a
+Beaming and [Scrolls](/concepts/scrolls) are distinct mechanisms that share a
 trust anchor. Beaming moves charms between UTXOs and is verified by the
 commitment and finality proof above. Scrolls are the Internet Computer canisters
 that custody and sign Bitcoin/Cardano UTXOs and that attest Cardano finality.

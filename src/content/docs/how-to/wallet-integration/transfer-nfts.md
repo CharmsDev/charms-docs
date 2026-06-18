@@ -4,7 +4,7 @@ description: "Build a spell that sends an NFT charm to a new UTXO."
 ---
 
 Transferring an NFT sends the entire charm, unchanged, to a new output. This is a
-[simple transfer](/explanation/apps#simple-transfers-need-no-contract), so it
+[simple transfer](/concepts/apps#simple-transfers-need-no-contract), so it
 needs no app binary or contract proof — just asset preservation.
 
 ## The spell

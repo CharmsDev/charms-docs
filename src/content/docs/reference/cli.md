@@ -105,7 +105,7 @@ charms spell check \
 | --- | --- |
 | `--spell <FILE>` | Spell YAML/JSON. Default: `/dev/stdin`. |
 | `--private-inputs <FILE>` | YAML/JSON map of app → private input (`w`). |
-| `--beamed-from <STRING>` | YAML/JSON map `input_index -> [source_utxo, nonce]` for [beamed](/explanation/beaming) inputs. |
+| `--beamed-from <STRING>` | YAML/JSON map `input_index -> [source_utxo, nonce]` for [beamed](/concepts/beaming) inputs. |
 | `--app-bins <WASM>...` | App `.wasm` binaries (repeatable). |
 | `--app-signatures <FILE>` | YAML/JSON map `vk -> {public_key, signature}` for versioned apps. |
 | `--prev-txs <HEX>...` | Prerequisite transactions (repeatable). Plain hex, `!bitcoin …`/`!cardano …` tagged forms, or JSON `{"bitcoin":"…"}`. |

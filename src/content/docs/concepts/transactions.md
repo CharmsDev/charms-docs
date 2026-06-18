@@ -6,7 +6,7 @@ sidebar:
 ---
 
 A spell never travels alone — it rides inside an ordinary blockchain
-transaction, alongside a [proof](/explanation/spells#the-proof) of its
+transaction, alongside a [proof](/concepts/spells#the-proof) of its
 correctness. This page explains, conceptually, how a spell becomes part of a
 real transaction on each supported chain. For the byte-level layout, see the
 [Spell structure reference](/reference/spell).
@@ -74,7 +74,7 @@ mechanics differ in three ways:
    ledger requires a **collateral UTXO** — a normal ADA input that is forfeited
    only if script validation fails. You supply it when proving a Cardano spell
    (`charms spell prove --collateral-utxo …`). Cardano spell transactions are
-   also co-signed by a [Scrolls](/explanation/scrolls) canister.
+   also co-signed by a [Scrolls](/concepts/scrolls) canister.
 
 ## Prerequisite transactions
 
@@ -82,5 +82,5 @@ Verifying a spell requires the transactions that produced its inputs — the
 **prerequisite transactions** (`prev_txs`). They let the verifier recover the
 charms being spent and confirm that each input's own spell was correct. When you
 prove or check a spell, you pass these transactions explicitly. In cross-chain
-[beaming](/explanation/beaming), a prerequisite transaction also carries a
+[beaming](/concepts/beaming), a prerequisite transaction also carries a
 *finality proof* showing it is irreversibly confirmed on its origin chain.

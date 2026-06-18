@@ -72,7 +72,7 @@ bitcoin-cli sendrawtransaction <signed_hex>
 ## Tips
 
 - Include every app's binary in `binaries` (or use `--app-bins` from the CLI) for
-  anything beyond a [simple transfer](/explanation/apps#simple-transfers-need-no-contract).
+  anything beyond a [simple transfer](/concepts/apps#simple-transfers-need-no-contract).
 - Pass app witnesses in `app_private_inputs` (keyed by app `tag/identity/vk`).
 - For [versioned apps](/how-to/manage-app-keys), include `app_signatures`.
 - Ensure the funding UTXOs cover the outputs plus fees; pick a `fee_rate`

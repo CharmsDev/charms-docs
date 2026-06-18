@@ -100,6 +100,6 @@ You can also look the txid up on
 
 - Mint tokens against your NFT, or transfer charms — see the
   [How-to guides](/how-to).
-- Understand what just happened: [Spells](/explanation/spells) and
-  [Transactions](/explanation/transactions).
+- Understand what just happened: [Spells](/concepts/spells) and
+  [Transactions](/concepts/transactions).
 - Run proving yourself: [Run a prover server](/how-to/run-a-prover-server).
