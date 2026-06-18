@@ -16,8 +16,7 @@ Install the prerequisites and the CLI (details in
 rustup target add wasm32-wasip1            # WebAssembly target
 brew install protobuf                      # Protocol Buffers compiler (macOS)
 
-export CARGO_TARGET_DIR=$(mktemp -d)/target  # note: must end with /target
-cargo install --locked charms
+cargo install charms --locked
 ```
 
 Check it works:
